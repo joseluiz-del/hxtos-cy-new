@@ -1,1330 +1,771 @@
 <!DOCTYPE html>
-<!-- saved from url=(0080)file:///C:/Users/HxTos/Downloads/CY_VSC_MultiSite_TelaUnica_com_GateControl.html -->
+<!-- saved from url=(0093)file:///C:/Users/HxTos/Desktop/Port%20Automation/HXtos%20CY/CY%20Cntr%20Inspect%205Light.html -->
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CY | VSC Multi-Site (Tela Única)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CY | Inspect &amp; Avarias (White UI)</title>
   <style>
     :root{
-      --bg:#e9ecef; --card:#fff; --text:#1f2a37; --muted:#6b7280;
-      --line:#d9dde3; --teal:#00a6c8; --teal2:#028eaa;
-      --shadow:0 10px 22px rgba(16,24,40,.12);
-      --r12:12px; --r10:10px;
-      --focus:rgba(0,166,200,.28);
+      /* WHITE UI */
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --text:#0f172a;       /* slate-900 */
+      --muted:#475569;      /* slate-600 */
+      --muted2:#64748b;     /* slate-500 */
+      --line:rgba(15,23,42,.12);
+
+      /* Accent (blue/green) */
+      --blue:#2563eb;       /* blue-600 */
+      --green:#10b981;      /* emerald-500 */
+
+      --btn:#0f172a;
+      --btnText:#ffffff;
+
+      --ok:#16a34a;
+      --warn:#d97706;
+      --bad:#dc2626;
+      --info:#2563eb;
+
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:Montserrat,Segoe UI,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    /* Top */
-    .topbar{
-      height:64px; position:sticky; top:0; z-index:5;
-      background:linear-gradient(90deg,var(--teal2),var(--teal));
-      display:flex; align-items:center; padding:0 16px; color:#fff;
-      box-shadow:0 6px 14px rgba(0,0,0,.12);
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:var(--bg);         /* branco */
+      height:100vh;
+      overflow:hidden;
     }
-    .iconbtn{
-      width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.28);
-      background:rgba(255,255,255,.12); display:grid; place-items:center; cursor:pointer;
-      transition:.15s ease;
-    }
-    .iconbtn:hover{transform:translateY(-1px);background:rgba(255,255,255,.18)}
-    .brand{flex:1;text-align:center;font-weight:900;letter-spacing:.10em;font-size:20px;user-select:none}
-    .wrap{max-width:1400px;margin:0 auto;padding:14px}
-    /* Card */
-    .card{background:var(--card);border-radius:var(--r12);box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.05);overflow:hidden}
-    .cardHeader{padding:16px 18px 10px;border-bottom:1px solid rgba(0,0,0,.06)}
-    .title{margin:0;font-size:26px;font-weight:900;color:var(--teal2)}
-    /* Tabs */
-    .tabs{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
-    .tab{
-      border:1px solid rgba(0,0,0,.10);background:#f7fbfc;color:#0e5564;
-      padding:10px 12px;border-radius:999px;cursor:pointer;font-weight:800;font-size:13px;
-      display:flex;align-items:center;gap:8px;transition:.15s ease;user-select:none;
-    }
-    .tab:hover{transform:translateY(-1px)}
-    .tab.active{background:rgba(0,166,200,.16);border-color:rgba(0,166,200,.35);color:#004c5c}
-    .pill{width:10px;height:10px;border-radius:999px;background:var(--teal2);box-shadow:0 0 0 4px rgba(0,166,200,.16)}
-    .content{padding:14px 16px 16px}
-    .twoCol{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
-    @media (max-width:1060px){.twoCol{grid-template-columns:1fr}}
-    .panel{
-      border:1px solid rgba(0,0,0,.08);border-radius:var(--r10);padding:14px;background:#fff;
-    }
-    .sub{margin:0 0 10px;font-weight:900;color:#0e5564;font-size:16px}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:520px){.grid2{grid-template-columns:1fr}}
-    .field{display:flex;flex-direction:column;gap:7px}
-    .label{font-size:12px;color:var(--muted);font-weight:800}
-    input,select{
-      border:1px solid rgba(0,0,0,.14);border-radius:8px;padding:10px 12px;outline:none;
-      background:#f2f2f2;color:#2b2b2b;font-size:13px;transition:.15s ease;
-    }
-    input:focus,select:focus{border-color:rgba(0,166,200,.55);box-shadow:0 0 0 4px var(--focus);background:#fff}
-    .btnrow{display:flex;gap:12px;justify-content:flex-end;align-items:center;margin-top:10px;flex-wrap:wrap}
-    .btn{
-      border:none;padding:10px 14px;border-radius:10px;font-weight:900;cursor:pointer;
-      transition:.15s ease;font-size:13px;min-width:150px;display:inline-flex;gap:10px;align-items:center;justify-content:center;
-    }
-    .btn.light{background:#bfefff;color:#0a6477}
-    .btn.primary{background:var(--teal2);color:#fff}
-    .btn.ghost{background:#f6f7f9;border:1px solid rgba(0,0,0,.10);color:#1c4450}
-    .btn:hover{transform:translateY(-1px);filter:brightness(.98)}
-    .divider{height:1px;background:rgba(0,0,0,.10);margin:12px 0}
-    .hint{margin:0;color:var(--muted);font-weight:700;font-size:12px;line-height:1.35}
-    /* Compass (direção empilhamento) */
-    .configGrid{display:grid;grid-template-columns:230px 1fr 1fr;gap:12px;align-items:start}
-    @media (max-width:920px){.configGrid{grid-template-columns:1fr}}
-    .compassWrap{display:flex;flex-direction:column;gap:10px}
-    .compassLabel{font-weight:900;color:#0e5564;font-size:13px}
-    .compass{
-      width:190px;height:190px;border-radius:999px;border:2px solid rgba(0,0,0,.12);position:relative;
-      background:radial-gradient(circle at 30% 30%,#fff,#f1f6f8);box-shadow:0 10px 18px rgba(0,0,0,.10);
-    }
-    .ring{position:absolute;inset:14px;border-radius:999px;border:1px solid rgba(0,0,0,.14)}
-    .cross{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
-    .cross::before,.cross::after{content:"";position:absolute;background:rgba(0,166,200,.65);border-radius:999px}
-    .cross::before{width:2px;height:150px}.cross::after{height:2px;width:150px}
-    .dirbtn{
-      position:absolute;width:34px;height:34px;border-radius:999px;background:#fff;border:1px solid rgba(0,0,0,.12);
-      display:grid;place-items:center;font-weight:900;font-size:11px;color:#0e5564;cursor:pointer;transition:.12s ease;
-    }
-    .dirbtn:hover{transform:translateY(-1px)}
-    .dirbtn.active{background:var(--teal2);color:#fff;box-shadow:0 8px 14px rgba(0,166,200,.25)}
-    .N{top:-10px;left:50%;transform:translateX(-50%)} .NE{top:16px;right:16px}
-    .E{top:50%;right:-10px;transform:translateY(-50%)} .SE{bottom:16px;right:16px}
-    .S{bottom:-10px;left:50%;transform:translateX(-50%)} .SO{bottom:16px;left:16px}
-    .O{top:50%;left:-10px;transform:translateY(-50%)} .NO{top:16px;left:16px}
-    .needle{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
-    .needle svg{width:96px;height:96px;opacity:.92;transform-origin:50% 50%}
-    /* Toggle (Row/Tier) */
-    .toggleRow{display:flex;align-items:center;gap:10px;margin-top:4px}
-    .toggle{
-      width:52px;height:28px;border-radius:999px;background:#dde3ea;border:1px solid rgba(0,0,0,.12);
-      position:relative;cursor:pointer;transition:.15s ease;
-    }
-    .toggle::after{
-      content:"";width:22px;height:22px;border-radius:999px;position:absolute;top:2px;left:2px;background:#fff;
-      box-shadow:0 4px 10px rgba(0,0,0,.12);transition:.15s ease;
-    }
-    .toggle.on{background:rgba(0,166,200,.28);border-color:rgba(0,166,200,.35)}
-    .toggle.on::after{left:28px;background:#eaffff}
-    .tag{font-size:12px;font-weight:900;color:#0e5564}
-    /* Visualização (grid) */
-    .vizPanel{border-left:1px solid rgba(0,0,0,.12);padding-left:18px}
-    @media (max-width:1060px){.vizPanel{border-left:none;padding-left:0;border-top:1px solid rgba(0,0,0,.12);padding-top:16px}}
-    .vizHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
-    .vizTitle{margin:0;font-size:14px;font-weight:900;color:#0e5564}
-    .walls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:12px;font-weight:800}
-    .ck{
-      display:flex;gap:6px;align-items:center;background:#f6f7f9;border:1px solid rgba(0,0,0,.10);
-      padding:6px 8px;border-radius:999px;cursor:pointer;user-select:none
-    }
-    .ck input{margin:0;width:16px;height:16px}
-    .yardWrap{display:grid;grid-template-columns:40px 1fr;gap:8px;align-items:start;margin-top:8px}
-    .yAxis{display:flex;flex-direction:column;gap:14px;padding-top:8px;align-items:flex-end;font-weight:900;color:#232a31}
-    .yard{
-      border-radius:12px;padding:10px 10px 6px;background:#fff;border:1px solid rgba(0,0,0,.10);
-      display:inline-block;position:relative;
-    }
-    .yardGrid{display:grid;gap:10px;justify-content:start;align-content:start}
-    .slot{
-      width:40px;height:40px;background:#dcdcdc;border-radius:3px;border:1px solid rgba(0,0,0,.06);
-      cursor:pointer;transition:.12s ease;position:relative;
-    }
-    .slot:hover{transform:translateY(-1px);filter:brightness(.98)}
-    .slot.occ{background:rgba(0,166,200,.28)}
-    .slot.occ::after{content:"";position:absolute;inset:10px;border-radius:2px;border:2px solid rgba(2,142,170,.75)}
-    .xAxis{display:grid;gap:10px;margin-left:40px;margin-top:8px;font-weight:900;color:#232a31}
-    .xAxis span{display:block;width:40px;text-align:center}
-    .yardWallsTop,.yardWallsBottom{position:absolute;left:10px;right:10px;height:10px;display:flex;justify-content:center;align-items:center;pointer-events:none}
-    .yardWallsTop{top:-2px}.yardWallsBottom{bottom:-2px}
-    .yardWallsLeft,.yardWallsRight{position:absolute;top:10px;bottom:10px;width:10px;display:flex;justify-content:center;align-items:center;pointer-events:none}
-    .yardWallsLeft{left:-2px}.yardWallsRight{right:-2px}
-    .wallLine{background:#cfd6dd;border-radius:999px}
-    /* Table */
-    .tableCard{margin-top:14px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:var(--r12);box-shadow:var(--shadow);overflow:hidden}
-    .tableHead{padding:16px 16px 10px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-    .tableTitle{margin:0;font-size:24px;font-weight:900;color:var(--teal2)}
-    .exportBtn{
-      border:none;background:var(--teal2);color:#fff;border-radius:12px;padding:12px 16px;font-weight:900;
-      cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-width:260px;justify-content:center;
-      transition:.15s ease;
-    }
-    .exportBtn:hover{filter:brightness(.98);transform:translateY(-1px)}
-    .searchbar{padding:10px 16px 0}
-    .search{
-      width:100%;border-radius:8px;background:#efefef;border:1px solid rgba(0,0,0,.12);
-      padding:11px 12px 11px 38px;outline:none;font-weight:800;
-      background-image:radial-gradient(circle at 14px 50%,rgba(0,0,0,.35) 2px,transparent 3px);
-      background-repeat:no-repeat;background-size:20px 20px;background-position:10px 50%;
-    }
-    table{width:100%;border-collapse:collapse;font-size:13px}
-    th,td{padding:12px 10px;border-bottom:1px solid rgba(0,0,0,.10);text-align:left;white-space:nowrap}
-    th{color:var(--teal2);font-weight:900;font-size:12px}
-    td{color:#2a2a2a;font-weight:800}
-    .actions{display:flex;gap:8px;align-items:center}
-    .smallBtn{border:none;background:var(--teal2);color:#fff;border-radius:7px;padding:8px 10px;font-weight:900;cursor:pointer;font-size:11px}
-    .smallBtn.icon{width:34px;padding:8px 0}
-    .smallBtn.secondary{background:#1aa2bb}.smallBtn.danger{background:#0f7e95}
-    .foot{padding:12px 16px;color:var(--muted);font-weight:800;font-size:12px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
-    /* Toast */
-    .toast{
-      position:fixed;bottom:16px;right:16px;background:#0e5564;color:#fff;padding:12px 14px;border-radius:12px;
-      box-shadow:0 14px 28px rgba(0,0,0,.20);opacity:0;transform:translateY(10px);transition:.18s ease;
-      max-width:420px;z-index:20;font-weight:900;font-size:13px
-    }
-    .toast.show{opacity:1;transform:translateY(0)}
-  
-    /* Required + validation */
-    :root{
-      --danger:#c1121f;
-      --dangerBg: rgba(193,18,31,.10);
-      --ok:#1f7a1f;
-      --amber:#a85d00;
-    }
-    .req{color:var(--danger);font-weight:900}
-    .error input,.error select{
-      border-color: var(--danger)!important;
-      background: var(--dangerBg)!important;
-      box-shadow: 0 0 0 4px rgba(193,18,31,.14)!important;
-    }
-    .errmsg{display:none;color:var(--danger);font-weight:900;font-size:12px;line-height:1.2}
-    .error .errmsg{display:block}
 
-    /* Gate Decision + chips */
-    .statusBox{
-      border:1px dashed rgba(0,0,0,.18);
-      border-radius:12px;
+    .app{display:grid; grid-template-columns:260px 1fr; height:100%;}
+    .sidebar{
+      background:var(--panel);      /* branco */
+      border-right:1px solid var(--line);
+      padding:14px;
+      overflow:auto;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:10px;
       padding:12px;
-      background:#fbfdfe;
-      display:flex;flex-direction:column;gap:8px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fff;              /* branco */
+      margin-bottom:12px;
     }
-    .statusLine{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:900;font-size:13px}
-    .badge{
-      padding:6px 10px;border-radius:999px;font-weight:900;font-size:12px;
-      border:1px solid rgba(0,0,0,.10);
-      background:#f6f7f9;color:#1c4450;
+    .logo{
+      width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
+      background:linear-gradient(135deg, var(--blue), var(--green));
+      color:#fff;
+      font-weight:900;
     }
-    .badge.ok{background:rgba(31,122,31,.10);border-color:rgba(31,122,31,.22);color:var(--ok)}
-    .badge.warn{background:rgba(193,18,31,.08);border-color:rgba(193,18,31,.18);color:var(--danger)}
-    .badge.amber{background:rgba(168,93,0,.10);border-color:rgba(168,93,0,.20);color:var(--amber)}
-    .chipRow{display:flex;gap:8px;flex-wrap:wrap}
-    .chip{
-      display:inline-flex;gap:8px;align-items:center;
-      padding:8px 10px;border-radius:999px;
-      background:#f6f7f9;border:1px solid rgba(0,0,0,.10);
-      font-weight:900;font-size:12px;color:#0e5564;
-      cursor:pointer;user-select:none;transition:.12s ease;
-    }
-    .chip:hover{transform:translateY(-1px)}
-    .chip .dot{width:10px;height:10px;border-radius:999px;background:var(--teal2);box-shadow:0 0 0 4px rgba(0,166,200,.16)}
-    .chip.off{opacity:.55}
-    .chip.off .dot{background:#7b8794;box-shadow:none}
+    .brand .t1{font-weight:900; font-size:14px;}
+    .brand .t2{color:var(--muted2); font-size:12px; margin-top:2px;}
 
+    .nav a{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      color:rgba(15,23,42,.88);
+      text-decoration:none;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+    .nav a:hover{
+      background:rgba(37,99,235,.06);
+      border-color:rgba(37,99,235,.15);
+    }
+    .nav a.active{
+      background:rgba(37,99,235,.10);
+      border-color:rgba(37,99,235,.25);
+    }
+
+    .main{padding:16px; overflow:auto; background:#fff;} /* branco */
+    .top{
+      display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+      margin-bottom:12px;
+    }
+    h1{margin:0; font-size:18px;}
+    .sub{margin-top:4px; color:var(--muted); font-size:12px;}
+
+    .btn{
+      border:1px solid rgba(15,23,42,.18);
+      background:#fff;
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:13px;
+    }
+    .btn:hover{background:rgba(15,23,42,.03);}
+    .btn.primary{
+      background:var(--blue);
+      border-color:rgba(37,99,235,.35);
+      color:#fff;
+    }
+    .btn.primary:hover{filter:brightness(.95);}
+
+    .grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:12px;}
+
+    .card{
+      border:1px solid var(--line);
+      background:#fff; /* branco */
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 1px 0 rgba(15,23,42,.04);
+    }
+    .card h2{
+      margin:0;
+      padding:12px 12px;
+      font-size:13px;
+      letter-spacing:.2px;
+      border-bottom:1px solid var(--line);
+      background:#fff;  /* sem “tinta” */
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .body{padding:12px;}
+
+    label{display:block; font-size:12px; color:rgba(51,65,85,.95); margin:10px 0 6px;}
+    input, select, textarea{
+      width:100%;
+      border:1px solid rgba(15,23,42,.16);
+      background:#fff;
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 11px;
+      outline:none;
+      font-size:13px;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color:rgba(37,99,235,.55);
+      box-shadow:0 0 0 3px rgba(37,99,235,.12);
+    }
+    textarea{min-height:90px; resize:vertical;}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+
+    .hint{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.35;
+    }
+
+    .tag{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.16);
+      background:#fff;
+      font-size:11px;
+      color:rgba(15,23,42,.78);
+      white-space:nowrap;
+    }
+    .dot{width:7px;height:7px;border-radius:50%;}
+    .ok .dot{background:var(--ok)}
+    .warn .dot{background:var(--warn)}
+    .bad .dot{background:var(--bad)}
+    .info .dot{background:var(--info)}
+
+    .list{
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .list .item{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      padding:10px 10px;
+      border-top:1px solid rgba(15,23,42,.08);
+      cursor:pointer;
+      background:#fff;
+    }
+    .list .item:first-child{border-top:none;}
+    .list .item:hover{background:rgba(37,99,235,.06);}
+    .mono{font-family:var(--mono)}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+
+    .uploadBox{
+      border:1px dashed rgba(15,23,42,.22);
+      border-radius:14px;
+      padding:10px;
+      background:#fff; /* branco, sem azul */
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .uploadBox small{color:var(--muted2)}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.16);
+      background:#fff;
+      cursor:pointer;
+      font-size:12px;
+    }
+    .chip:hover{background:rgba(15,23,42,.03)}
+    .chip .x{opacity:.75; font-weight:900}
+
+    .page{display:none;}
+    .page.active{display:block;}
+
+    @media (max-width: 980px){
+      .app{grid-template-columns:1fr;}
+      .sidebar{border-right:none; border-bottom:1px solid var(--line);}
+      .grid{grid-template-columns:1fr;}
+      .row{grid-template-columns:1fr;}
+    }
   </style>
 </head>
 
 <body>
-  <div class="topbar">
-    <button class="iconbtn" title="Menu" aria-label="Menu">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M4 6h16M4 12h16M4 18h12" stroke="white" stroke-width="2.4" stroke-linecap="round"></path>
-      </svg>
-    </button>
-    <div class="brand">CY</div>
-    <div style="display:flex;gap:10px">
-      <button class="iconbtn" title="Dica" aria-label="Dica" onclick="toast(&#39;Use as abas para alternar entre os 3 blocos. O grid simula ocupação: clique nos slots.&#39;);">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M12 18h.01M10 10a2 2 0 1 1 3 1.7c-.7.5-1 1-1 2.3v.5" stroke="white" stroke-width="2.4" stroke-linecap="round"></path>
-          <path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10Z" stroke="white" stroke-width="2.2"></path>
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="card">
-      <div class="cardHeader">
-        <h1 class="title">VSC Multi-Site</h1>
-
-        <div class="tabs" role="tablist" aria-label="VSC Tabs">
-          <button class="tab" data-tab="tab1" role="tab" aria-selected="false"><span class="pill"></span> Sites &amp; Layout</button>
-          <button class="tab" data-tab="tab2" role="tab" aria-selected="false"><span class="pill"></span> Inventário &amp; Reconciliação</button>
-          <button class="tab" data-tab="tab3" role="tab" aria-selected="false"><span class="pill"></span> Transfer Orders</button>
-          <button class="tab active" data-tab="tab4" role="tab" aria-selected="true"><span class="pill"></span> Gate Control</button>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">CY</div>
+        <div>
+          <div class="t1">Inspect &amp; Avarias</div>
+          <div class="t2">White UI • Azul/Verde (detalhes)</div>
         </div>
       </div>
 
-      <div class="content">
+      <nav class="nav" id="nav">
+        <a data-page="inspect" class="active">🔍 Inspect
+          <span style="margin-left:auto" class="tag info"><span class="dot"></span><span id="pillInspect">1</span></span>
+        </a>
+        <a data-page="avarias" class="">🛠️ Avarias
+          <span style="margin-left:auto" class="tag warn"><span class="dot"></span><span id="pillAvarias">0</span></span>
+        </a>
+        <a data-page="relatorios" class="">📁 Relatórios</a>
+      </nav>
 
-        <!-- TAB 1: Sites & Layout -->
-        <div id="tab1" class="tabPane" style="display: none;">
-          <div class="twoCol">
-            <div class="panel">
-              <p class="sub">Cadastro base</p>
+      <div class="hint" style="margin-top:12px;">
+        Dados persistidos no navegador (demo local).
+      </div>
+    </aside>
 
-              <div class="grid2">
-                <div class="field"><div class="label">Nome do Site Externo</div><input id="siteName" value="Site Externo A" placeholder="Ex.: Overflow Retroárea A"></div>
-                <div class="field"><div class="label">Tipo</div>
-                  <select id="siteType">
-                    <option>Overflow</option><option>Depot</option><option>Retroárea</option><option>IMDG</option><option>Reefer</option><option>Outros</option>
-                  </select>
+    <main class="main">
+      <div class="top">
+        <div>
+          <h1 id="pageTitle">CY | Inspect</h1>
+          <div class="sub" id="pageSub">Registrar inspeção e gerar avaria.</div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn" id="seed">🧪 Popular demo</button>
+          <button class="btn" id="reset">♻️ Reset</button>
+        </div>
+      </div>
+
+      <!-- INSPECT -->
+      <section class="page active" id="page-inspect">
+        <div class="grid">
+          <section class="card">
+            <h2>
+              <span>Registro de Inspeção</span>
+              <span class="tag info"><span class="dot"></span><span class="mono">INSP</span></span>
+            </h2>
+            <div class="body">
+              <div class="row">
+                <div>
+                  <label>CNTR</label>
+                  <input id="i_cntr" placeholder="ABCD1234567">
                 </div>
-
-                <div class="field"><div class="label">Status</div><select id="siteStatus"><option>Ativo</option><option>Inativo</option></select></div>
-                <div class="field"><div class="label">Operador Responsável</div><input id="siteOperator" value="Operação Própria" placeholder="Ex.: Terceiro / Próprio"></div>
-
-                <div class="field"><div class="label">Identificação da quadra</div><input id="quadraName" value="Quadra 1" placeholder="Ex.: Q1"></div>
-                <div class="field"><div class="label">Quantidade Bay</div>
-                  <select id="bayQty">
-                    <option value="7">7</option><option value="10">10</option><option value="12">12</option><option value="16">16</option><option value="24">24</option>
-                  </select>
-                </div>
-
-                <div class="field"><div class="label">Quantidade Row</div>
-                  <select id="rowQty">
-                    <option value="13">13</option><option value="10">10</option><option value="12">12</option><option value="20">20</option><option value="28">28</option>
-                  </select>
-                </div>
-                <div class="field"><div class="label">Quantidade Tier</div>
-                  <select id="tierQty">
-                    <option value="5">5</option><option value="4">4</option><option value="6">6</option><option value="7">7</option>
+                <div>
+                  <label>Tipo</label>
+                  <select id="i_tipo">
+                    <option>GATE IN</option>
+                    <option>GATE OUT</option>
+                    <option>PÁTIO</option>
+                    <option>TRANSFERÊNCIA</option>
                   </select>
                 </div>
               </div>
 
-              <div class="btnrow">
-                <button class="btn light" onclick="clearTab1()">Limpar</button>
-                <button class="btn primary" onclick="generateLayout()">Gerar Visualização</button>
+              <div class="row">
+                <div>
+                  <label>Vínculo (BL/CE/OS)</label>
+                  <input id="i_vinc" placeholder="CE 2026/000123 | BL: ...">
+                </div>
+                <div>
+                  <label>Responsável</label>
+                  <input id="i_resp" placeholder="Inspetor 01">
+                </div>
               </div>
 
-              <div class="divider"></div>
-
-              <p class="sub">Configurações</p>
-
-              <div class="configGrid">
-                <div class="compassWrap">
-                  <div class="compassLabel">Direção do empilhamento:</div>
-                  <div class="compass">
-                    <div class="ring"></div><div class="cross"></div>
-
-                    <button class="dirbtn N active" data-dir="N" onclick="setDir(&#39;N&#39;)">N</button>
-                    <button class="dirbtn NE" data-dir="NE" onclick="setDir(&#39;NE&#39;)">NE</button>
-                    <button class="dirbtn E" data-dir="E" onclick="setDir(&#39;E&#39;)">L</button>
-                    <button class="dirbtn SE" data-dir="SE" onclick="setDir(&#39;SE&#39;)">SE</button>
-                    <button class="dirbtn S" data-dir="S" onclick="setDir(&#39;S&#39;)">S</button>
-                    <button class="dirbtn SO" data-dir="SO" onclick="setDir(&#39;SO&#39;)">SO</button>
-                    <button class="dirbtn O" data-dir="O" onclick="setDir(&#39;O&#39;)">O</button>
-                    <button class="dirbtn NO" data-dir="NO" onclick="setDir(&#39;NO&#39;)">NO</button>
-
-                    <div class="needle">
-                      <svg id="needleSvg" viewBox="0 0 100 100" style="transform: rotate(0deg);">
-                        <defs>
-                          <lineargradient id="g" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0" stop-color="#028eaa"></stop><stop offset="1" stop-color="#00a6c8"></stop>
-                          </lineargradient>
-                        </defs>
-                        <path d="M50 15 L58 50 L50 85 L42 50 Z" fill="url(#g)" stroke="#0e5564" stroke-width="2"></path>
-                        <circle cx="50" cy="50" r="6" fill="#0e5564"></circle>
-                      </svg>
-                    </div>
-                  </div>
-                  <p class="hint">Clique nas direções para ajustar o sentido do empilhamento.</p>
-                </div>
-
+              <div class="row">
                 <div>
-                  <div class="field"><div class="label">Muro(s)</div>
-                    <select id="muro">
-                      <option value="nao">Não</option>
-                      <option value="esq">1°: Lado esquerdo</option>
-                      <option value="dir">2°: Lado direito</option>
-                      <option value="ambos">Ambos</option>
-                    </select>
-                  </div>
-
-                  <div style="height:10px"></div>
-
-                  <div class="field"><div class="label">Alt. Máx.</div>
-                    <select id="altMax"><option>--</option><option>4</option><option>5</option><option>6</option><option>7</option></select>
-                  </div>
-
-                  <div style="height:10px"></div>
-
-                  <div class="field"><div class="label">Restrições da quadra</div>
-                    <select id="restricoes">
-                      <option>Empty/Full (padrão)</option>
-                      <option>Somente Empty</option>
-                      <option>Somente Full</option>
-                      <option>Reefer permitido</option>
-                      <option>IMDG permitido</option>
-                      <option>OOG permitido</option>
-                    </select>
-                  </div>
+                  <label>Severidade</label>
+                  <select id="i_sev">
+                    <option>BAIXA</option>
+                    <option>MÉDIA</option>
+                    <option>ALTA</option>
+                    <option>CRÍTICA</option>
+                  </select>
                 </div>
-
                 <div>
-                  <div class="label">Empilhar a partir de:</div>
-                  <div class="toggleRow">
-                    <span class="tag">Row</span>
-                    <div id="toggleRowTier" class="toggle" onclick="toggleRowTier()"></div>
-                    <span class="tag">Tier</span>
-                  </div>
-
-                  <div style="height:14px"></div>
-
-                  <div class="field"><div class="label">Capacidade Máx.</div><input id="capMax" value="XXX (X Tiers)"></div>
-
-                  <div style="height:18px"></div>
-
-                  <div class="btnrow" style="justify-content:flex-start">
-                    <button class="btn primary" onclick="saveSiteQuadra()">Cadastrar Site/Quadra</button>
-                  </div>
+                  <label>Status</label>
+                  <select id="i_status">
+                    <option>RASCUNHO</option>
+                    <option>EM ANÁLISE</option>
+                    <option>ENCERRADA</option>
+                  </select>
                 </div>
+              </div>
+
+              <label>Descrição / Observações</label>
+              <textarea id="i_desc" placeholder="Resumo: área, tipo de dano, risco e decisão operacional."></textarea>
+
+              <div class="actions">
+                <button class="btn primary" id="i_save">💾 Salvar inspeção</button>
+                <button class="btn" id="i_gen">🛠️ Gerar avaria</button>
+                <button class="btn" id="i_new">➕ Nova</button>
               </div>
             </div>
+          </section>
 
-            <div class="panel vizPanel">
-              <div class="vizHead">
-                <p class="vizTitle">Visualização (Quadra)</p>
-                <div class="walls">
-                  <label class="ck"><input id="wTop" type="checkbox" onchange="applyWalls()">Topo</label>
-                  <label class="ck"><input id="wLeft" type="checkbox" onchange="applyWalls()">Esq</label>
-                  <label class="ck"><input id="wRight" type="checkbox" onchange="applyWalls()">Dir</label>
-                  <label class="ck"><input id="wBottom" type="checkbox" onchange="applyWalls()">Baixo</label>
-                </div>
-              </div>
-
-              <div class="yardWrap">
-                <div id="yAxis" class="yAxis"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div></div>
-
+          <section class="card">
+            <h2>
+              <span>Inspeções Recentes</span>
+              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>clique para ver</span>
+            </h2>
+            <div class="body">
+              <div class="row">
                 <div>
-                  <div id="yard" class="yard">
-                    <div id="yardWallsTop" class="yardWallsTop"></div>
-                    <div id="yardWallsBottom" class="yardWallsBottom"></div>
-                    <div id="yardWallsLeft" class="yardWallsLeft"></div>
-                    <div id="yardWallsRight" class="yardWallsRight"></div>
-                    <div id="yardGrid" class="yardGrid" style="grid-template-columns: repeat(7, 40px);"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
-                  </div>
-
-                  <div id="xAxis" class="xAxis" style="grid-template-columns: repeat(7, 40px);"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span></div>
-
-                  <p class="hint" style="margin-top:8px">Clique em um slot para simular “ocupado” (demo).</p>
+                  <label>Filtro CNTR</label>
+                  <input id="i_fcntr" placeholder="ABCD...">
+                </div>
+                <div>
+                  <label>Filtro Status</label>
+                  <select id="i_fstatus">
+                    <option value="">Todos</option>
+                    <option>RASCUNHO</option>
+                    <option>EM ANÁLISE</option>
+                    <option>ENCERRADA</option>
+                  </select>
                 </div>
               </div>
+
+              <div class="actions" style="margin-top:10px;">
+                <button class="btn" id="i_apply">🔎 Aplicar</button>
+                <button class="btn" id="i_clear">🧹 Limpar</button>
+              </div>
+
+              <div style="margin-top:12px;" class="list" id="i_list">
+        <div class="item" data-id="INSP-20260105-162832">
+          <div>
+            <div><b>MSCU3452345</b> <span class="mono" style="opacity:.70">• INSP-20260105-162832</span></div>
+            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
+              <span class="tag ok"><span class="dot"></span>BAIXA</span> <span class="tag info"><span class="dot"></span>ENCERRADA</span>
+              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>GATE IN</span>
             </div>
           </div>
-        </div>
-
-        <!-- TAB 2: Inventário & Reconciliação -->
-        <div id="tab2" class="tabPane" style="display: none;">
-          <div class="twoCol">
-            <div class="panel">
-              <p class="sub">Inventário (filtros)</p>
-
-              <div class="grid2">
-                <div class="field"><div class="label">Site</div>
-                  <select id="invSite">
-                    <option>Site Externo A</option><option>Site Externo B</option>
-                  </select>
-                </div>
-                <div class="field"><div class="label">Quadra</div>
-                  <select id="invQuadra"><option>Quadra 1</option><option>Quadra 2</option></select>
-                </div>
-                <div class="field"><div class="label">Tipo</div>
-                  <select id="invTipo"><option>Todos</option><option>Empty</option><option>Full</option><option>Reefer</option><option>IMDG</option><option>OOG</option></select>
-                </div>
-                <div class="field"><div class="label">Dwell time</div>
-                  <select id="invDwell"><option>Qualquer</option><option>&gt; 5 dias</option><option>&gt; 10 dias</option><option>&gt; 20 dias</option></select>
-                </div>
-              </div>
-
-              <div class="btnrow" style="justify-content:flex-start">
-                <button class="btn primary" onclick="quickCheck(&#39;in&#39;)">Check-in</button>
-                <button class="btn ghost" onclick="quickCheck(&#39;out&#39;)">Check-out</button>
-                <button class="btn light" onclick="toast(&#39;Mover interno (demo): ajuste via tabela / regra de negócio.&#39;);">Mover</button>
-              </div>
-
-              <div class="divider"></div>
-
-              <p class="sub">Reconciliação (auditoria)</p>
-
-              <div class="grid2">
-                <div class="field"><div class="label">Modo</div>
-                  <select id="audMode"><option>Por Quadra</option><option>Por faixa (Row/Bay)</option><option>Por lista (scan)</option></select>
-                </div>
-                <div class="field"><div class="label">Critério</div>
-                  <select id="audCrit"><option>Somente divergências</option><option>Somente IMDG</option><option>Somente Reefer</option><option>Dwell &gt; 20 dias</option></select>
-                </div>
-              </div>
-
-              <div class="btnrow">
-                <button class="btn primary" onclick="seedAudit()">Iniciar Auditoria</button>
-                <button class="btn light" onclick="exportActiveTable()">Exportar Relatório</button>
-              </div>
+          <div class="mono" style="opacity:.60">05/01/2026 16:28</div>
+        </div></div>
             </div>
+          </section>
+        </div>
+      </section>
 
-            <div class="panel vizPanel">
-              <div class="vizHead">
-                <p class="vizTitle">Ocupação (visual)</p>
-                <span class="hint">Usa o mesmo grid do layout (demo).</span>
-              </div>
-
-              <div class="yardWrap">
-                <div class="yAxis" id="yAxis2"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div></div>
+      <!-- AVARIAS -->
+      <section class="page" id="page-avarias">
+        <div class="grid">
+          <section class="card">
+            <h2>
+              <span>Registro de Avaria</span>
+              <span class="tag warn"><span class="dot"></span><span class="mono">AVA</span></span>
+            </h2>
+            <div class="body">
+              <div class="row">
                 <div>
-                  <div class="yard"><div id="yardGrid2" class="yardGrid" style="grid-template-columns: repeat(7, 40px);"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div></div></div>
-                  <div class="xAxis" id="xAxis2" style="grid-template-columns: repeat(7, 40px);"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span></div>
-                  <p class="hint" style="margin-top:8px">Slots em azul simulam ocupação. Clique para alternar.</p>
+                  <label>CNTR</label>
+                  <input id="a_cntr" placeholder="ABCD1234567">
+                </div>
+                <div>
+                  <label>Origem</label>
+                  <select id="a_origem">
+                    <option>VISTORIA</option>
+                    <option>GATE</option>
+                    <option>PÁTIO</option>
+                    <option>EQUIPAMENTO</option>
+                    <option>TERCEIRO</option>
+                  </select>
                 </div>
               </div>
+
+              <div class="row">
+                <div>
+                  <label>Severidade</label>
+                  <select id="a_sev">
+                    <option>BAIXA</option>
+                    <option>MÉDIA</option>
+                    <option>ALTA</option>
+                    <option>CRÍTICA</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Status</label>
+                  <select id="a_status">
+                    <option>ABERTA</option>
+                    <option>EM ANÁLISE</option>
+                    <option>EM REPARO</option>
+                    <option>ENCERRADA</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label>Área</label>
+                  <select id="a_area">
+                    <option>PORTAS</option>
+                    <option>LATERAL ESQ</option>
+                    <option>LATERAL DIR</option>
+                    <option>FRENTE</option>
+                    <option>TETO</option>
+                    <option>PISO</option>
+                    <option>CANTONEIRAS</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Tipo</label>
+                  <select id="a_tipo">
+                    <option>AMASSADO</option>
+                    <option>CORTE / PERFURAÇÃO</option>
+                    <option>FERRUGEM</option>
+                    <option>TRINCA</option>
+                    <option>DESALINHAMENTO</option>
+                    <option>OUTRA</option>
+                  </select>
+                </div>
+              </div>
+
+              <label>Descrição / Decisão</label>
+              <textarea id="a_desc" placeholder="Descreva a avaria e decisão: hold, repair, liberação etc."></textarea>
+
+              <label>Fotos / Evidências</label>
+              <div class="uploadBox">
+                <div>
+                  <div style="font-weight:900;">📷 Anexar fotos</div>
+                  <small>Demo: salva apenas o nome do arquivo.</small>
+                </div>
+                <input id="a_files" type="file" multiple="" accept="image/*">
+              </div>
+              <div class="chips" id="a_chips"><span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>sem fotos</span></div>
+
+              <div class="actions">
+                <button class="btn primary" id="a_save">💾 Salvar avaria</button>
+                <button class="btn" id="a_new">➕ Nova</button>
+              </div>
             </div>
+          </section>
+
+          <section class="card">
+            <h2>
+              <span>Avarias Recentes</span>
+              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>clique para ver</span>
+            </h2>
+            <div class="body">
+              <div class="row">
+                <div>
+                  <label>Filtro CNTR</label>
+                  <input id="a_fcntr" placeholder="ABCD...">
+                </div>
+                <div>
+                  <label>Filtro Status</label>
+                  <select id="a_fstatus">
+                    <option value="">Todos</option>
+                    <option>ABERTA</option>
+                    <option>EM ANÁLISE</option>
+                    <option>EM REPARO</option>
+                    <option>ENCERRADA</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label>Filtro Severidade</label>
+                  <select id="a_fsev">
+                    <option value="">Todas</option>
+                    <option>BAIXA</option>
+                    <option>MÉDIA</option>
+                    <option>ALTA</option>
+                    <option>CRÍTICA</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Filtro Origem</label>
+                  <select id="a_forigem">
+                    <option value="">Todas</option>
+                    <option>VISTORIA</option>
+                    <option>GATE</option>
+                    <option>PÁTIO</option>
+                    <option>EQUIPAMENTO</option>
+                    <option>TERCEIRO</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="actions" style="margin-top:10px;">
+                <button class="btn" id="a_apply">🔎 Aplicar</button>
+                <button class="btn" id="a_clear">🧹 Limpar</button>
+              </div>
+
+              <div style="margin-top:12px;" class="list" id="a_list"><div class="item" style="cursor:default"><div style="color:rgba(71,85,105,.95)">Nenhum registro.</div><div class="mono">—</div></div></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- RELATORIOS -->
+      <section class="page" id="page-relatorios">
+        <div class="card">
+          <h2>Relatórios (placeholder)</h2>
+          <div class="body">
+            <div class="hint">Espaço para KPIs e exportações (CSV/PDF) em uma próxima iteração.</div>
           </div>
         </div>
-
-        <!-- TAB 3: Transfer Orders -->
-        <div id="tab3" class="tabPane" style="display: none;">
-          <div class="twoCol">
-            <div class="panel">
-              <p class="sub">Cadastro base (Transfer Order)</p>
-
-              <div class="grid2">
-                <div class="field"><div class="label">Origem</div>
-                  <select id="toOrig"><option>CY Principal</option><option>Site Externo A</option><option>Site Externo B</option></select>
-                </div>
-                <div class="field"><div class="label">Destino</div>
-                  <select id="toDest"><option>Site Externo A</option><option>Site Externo B</option><option>CY Principal</option></select>
-                </div>
-                <div class="field"><div class="label">Janela (início)</div><input id="toStart" type="datetime-local"></div>
-                <div class="field"><div class="label">Janela (fim)</div><input id="toEnd" type="datetime-local"></div>
-                <div class="field"><div class="label">Prioridade</div><select id="toPrio"><option>Normal</option><option>Alta</option></select></div>
-                <div class="field"><div class="label">Motivo</div><select id="toMot"><option>Overflow</option><option>Esvaziamento</option><option>Segregação</option><option>Inspeção</option><option>Outros</option></select></div>
-              </div>
-
-              <div class="btnrow">
-                <button class="btn light" onclick="toast(&#39;Filtros limpos (demo).&#39;)">Limpar</button>
-                <button class="btn primary" onclick="planTO()">Gerar Lista Planejada</button>
-              </div>
-
-              <div class="divider"></div>
-
-              <p class="sub">Configurações</p>
-
-              <div class="grid2">
-                <div class="field"><div class="label">Estratégia de seleção</div>
-                  <select id="toStrat"><option>FIFO (dwell)</option><option>Por tipo</option><option>Por documento</option><option>Por quadra</option></select>
-                </div>
-                <div class="field"><div class="label">Elegibilidade</div>
-                  <select id="toElig"><option>Bloquear holds impeditivos</option><option>Permitir holds (com exceção)</option></select>
-                </div>
-              </div>
-
-              <div class="btnrow" style="justify-content:flex-start">
-                <button class="btn primary" onclick="publishTO()">Publicar TO</button>
-                <button class="btn ghost" onclick="toast(&#39;TO pausada (demo).&#39;)">Pausar</button>
-                <button class="btn light" onclick="toast(&#39;Replanejamento aberto (demo).&#39;)">Replanejar</button>
-              </div>
-            </div>
-
-            <div class="panel vizPanel">
-              <p class="sub" style="margin-top:0">Cockpit (indicadores)</p>
-              <p class="hint">
-                Aqui você “pluga” KPIs: lead time por rota, % no prazo, exceções e replanejamentos.
-                No protótipo, são dados simulados ao publicar a TO.
-              </p>
-              <div class="divider"></div>
-              <button class="btn primary" style="width:100%" onclick="exportActiveTable()">Exportar Excel (CSV)</button>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- TAB 4: Gate Control -->
-        <div id="tab4" class="tabPane" style="display: block;">
-          <div class="twoCol">
-            <div class="panel">
-              <p class="sub">Gate In / Gate Out (todos obrigatórios)</p>
-
-              <div class="grid2">
-                <div class="field" id="g_action">
-                  <div class="label">Ação <span class="req">*</span></div>
-                  <select id="gAction">
-                    <option value="">Selecione...</option>
-                    <option value="Gate In">Gate In</option>
-                    <option value="Gate Out">Gate Out</option>
-                  </select>
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_site">
-                  <div class="label">Site <span class="req">*</span></div>
-                  <select id="gSite">
-                    <option value="">Selecione...</option>
-                    <option>CY Principal</option>
-                    <option>Site Externo A</option>
-                    <option>Site Externo B</option>
-                  </select>
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_lane">
-                  <div class="label">Gate Lane <span class="req">*</span></div>
-                  <select id="gLane">
-                    <option value="">Selecione...</option>
-                    <option>Lane 01</option><option>Lane 02</option><option>Lane 03</option><option>Lane 04</option>
-                  </select>
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_appt">
-                  <div class="label">Appointment / Agendamento <span class="req">*</span></div>
-                  <input id="gAppt" placeholder="Ex.: APT-2026-000123">
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_truck">
-                  <div class="label">Placa do Caminhão <span class="req">*</span></div>
-                  <input id="gTruck" placeholder="Ex.: ABC1D23">
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_driver">
-                  <div class="label">Documento do Motorista <span class="req">*</span></div>
-                  <input id="gDriver" placeholder="Ex.: CPF / CNH">
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_cntr">
-                  <div class="label">Container <span class="req">*</span></div>
-                  <input id="gCntr" placeholder="Ex.: MSCU1234567">
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_iso">
-                  <div class="label">ISO Size/Type <span class="req">*</span></div>
-                  <select id="gIso">
-                    <option value="">Selecione...</option>
-                    <option>20GP</option><option>40GP</option><option>40HC</option><option>45HC</option>
-                    <option>20RF</option><option>40RF</option><option>20OT</option><option>40OT</option>
-                  </select>
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_fullEmpty">
-                  <div class="label">Empty/Full <span class="req">*</span></div>
-                  <select id="gFullEmpty">
-                    <option value="">Selecione...</option>
-                    <option>Empty</option><option>Full</option>
-                  </select>
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_seal">
-                  <div class="label">Lacre <span class="req">*</span></div>
-                  <input id="gSeal" placeholder="Ex.: SEAL987654">
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_docref">
-                  <div class="label">Referência (CE/BL/DUE/TO) <span class="req">*</span></div>
-                  <input id="gDocref" placeholder="Ex.: CE... / BL... / DUE... / TO...">
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-
-                <div class="field" id="g_ts">
-                  <div class="label">Timestamp <span class="req">*</span></div>
-                  <input id="gTs" readonly="">
-                  <div class="errmsg">Obrigatório.</div>
-                </div>
-              </div>
-
-              <div class="divider"></div>
-
-              <p class="sub">Evidências (simulação)</p>
-              <div class="chipRow">
-                <div class="chip" id="c_ocr" onclick="toggleChip(&#39;c_ocr&#39;)"><span class="dot"></span> OCR CNTR</div>
-                <div class="chip" id="c_plate" onclick="toggleChip(&#39;c_plate&#39;)"><span class="dot"></span> OCR Placa</div>
-                <div class="chip" id="c_seal" onclick="toggleChip(&#39;c_seal&#39;)"><span class="dot"></span> Seal Check</div>
-                <div class="chip" id="c_photo" onclick="toggleChip(&#39;c_photo&#39;)"><span class="dot"></span> Foto/Imagens</div>
-                <div class="chip" id="c_damage" onclick="toggleChip(&#39;c_damage&#39;)"><span class="dot"></span> Damage Snapshot</div>
-              </div>
-
-              <div class="btnrow">
-                <button class="btn light" onclick="gateClear()">Limpar</button>
-                <button class="btn ghost" onclick="gateValidateOnly()">Validar</button>
-                <button class="btn primary" onclick="gateRegister()">Registrar Evento</button>
-              </div>
-
-              <p class="hint">Gate liberado quando: validação OK + (OCR CNTR + OCR Placa + Seal Check) ligados.</p>
-            </div>
-
-            <div class="panel vizPanel">
-              <p class="sub" style="margin-top:0">Gate Decision</p>
-              <div class="statusBox">
-                <div class="statusLine"><span>Validação</span><span id="valBadge" class="badge warn">Pendente</span></div>
-                <div class="statusLine"><span>Evidências</span><span id="evBadge" class="badge ok">Completo</span></div>
-                <div class="statusLine"><span>Decisão</span><span id="decBadge" class="badge warn">Bloqueado</span></div>
-              </div>
-
-              <div class="divider"></div>
-
-              <p class="sub">Ações rápidas (demo)</p>
-              <div class="btnrow" style="justify-content:flex-start">
-                <button class="btn primary" style="min-width:220px" onclick="toast(&#39;Ticket impresso (demo).&#39;)">Imprimir Ticket</button>
-                <button class="btn light" style="min-width:220px" onclick="toast(&#39;Alerta para Supervisor (demo).&#39;)">Chamar Supervisor</button>
-                <button class="btn ghost" style="min-width:220px" onclick="toast(&#39;Registro de exceção (demo).&#39;)">Abrir Exceção</button>
-              </div>
-
-              <div class="divider"></div>
-
-              <p class="sub">Integração sugerida</p>
-              <ul style="margin:0 0 6px 18px;color:var(--muted);font-weight:800;font-size:12px;line-height:1.35">
-                <li>OCR (placa + CNTR) + câmeras (imagem por evento)</li>
-                <li>Validação com estoque (inventário) + Transfer Orders</li>
-                <li>Publicação de eventos para TOS/ELS/PCS</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- LISTA (tabela compartilhada, muda conforme aba) -->
-    <div class="tableCard">
-      <div class="tableHead">
-        <h2 class="tableTitle" id="listTitle">Gate Event Log</h2>
-        <button class="exportBtn" onclick="exportActiveTable()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 3v10m0 0 4-4m-4 4-4-4M4 17v3h16v-3" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-          Exportar Excel (CSV)
-        </button>
-      </div>
-
-      <div class="searchbar">
-        <input class="search" id="searchInput" placeholder="Buscar..." oninput="filterTable()">
-      </div>
-
-      <div style="overflow:auto;">
-        <!-- Layout -->
-        <table id="layoutTable" style="display: none;">
-          <thead>
-            <tr>
-              <th>Site</th><th>Quadra</th><th>Bays</th><th>Rows</th><th>Tiers</th>
-              <th>Direção</th><th>Muro</th><th>Empilhar a partir de</th><th>Capacidade Máx</th><th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="layoutTbody"><tr>
-          <td>Site Externo A</td><td>Quadra 1</td><td>7</td><td>13</td><td>5</td>
-          <td>Norte</td><td>Sim</td><td>Row</td><td>1.440 (X tiers)</td>
-          <td>
-            <div class="actions">
-              <button class="smallBtn" onclick="viewRow(&#39;layout&#39;,0)">VER</button>
-              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e “Cadastrar”.&#39;)">✎</button>
-              <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow(&#39;layout&#39;,0)">🗑</button>
-            </div>
-          </td></tr><tr>
-          <td>Site Externo A</td><td>Quadra 2</td><td>10</td><td>10</td><td>6</td>
-          <td>Sudoeste</td><td>Não</td><td>Row</td><td>3.840 (X tiers)</td>
-          <td>
-            <div class="actions">
-              <button class="smallBtn" onclick="viewRow(&#39;layout&#39;,1)">VER</button>
-              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e “Cadastrar”.&#39;)">✎</button>
-              <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow(&#39;layout&#39;,1)">🗑</button>
-            </div>
-          </td></tr><tr>
-          <td>Site Externo B</td><td>Quadra 1</td><td>12</td><td>12</td><td>4</td>
-          <td>Leste</td><td>Sim</td><td>Tier</td><td>1.792 (X tiers)</td>
-          <td>
-            <div class="actions">
-              <button class="smallBtn" onclick="viewRow(&#39;layout&#39;,2)">VER</button>
-              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e “Cadastrar”.&#39;)">✎</button>
-              <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow(&#39;layout&#39;,2)">🗑</button>
-            </div>
-          </td></tr></tbody>
-        </table>
-
-        <!-- Inventário -->
-        <table id="inventoryTable" style="display: none;">
-          <thead>
-            <tr>
-              <th>Unidade</th><th>Tipo</th><th>Site</th><th>Quadra</th><th>Posição</th><th>Status</th><th>Hold</th><th>Último evento</th><th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="invTbody"><tr>
-          <td>MSCU1234567</td><td>Empty</td><td>Site Externo A</td><td>Quadra 1</td><td>B03-R07-T1</td>
-          <td>Presente</td><td>—</td><td>Check-in</td>
-          <td><div class="actions">
-            <button class="smallBtn" onclick="viewRow(&#39;inv&#39;,0)">VER</button>
-            <button class="smallBtn icon secondary" title="Ajustar" onclick="toast(&#39;Ajuste por auditoria (demo).&#39;)">⚙</button>
-          </div></td></tr><tr>
-          <td>CMAU7654321</td><td>Full</td><td>Site Externo A</td><td>Quadra 2</td><td>B05-R02-T1</td>
-          <td>Presente</td><td>—</td><td>Move interno</td>
-          <td><div class="actions">
-            <button class="smallBtn" onclick="viewRow(&#39;inv&#39;,1)">VER</button>
-            <button class="smallBtn icon secondary" title="Ajustar" onclick="toast(&#39;Ajuste por auditoria (demo).&#39;)">⚙</button>
-          </div></td></tr><tr>
-          <td>TGHU2468135</td><td>Reefer</td><td>Site Externo B</td><td>Quadra 1</td><td>B02-R09-T1</td>
-          <td>Presente</td><td>Temp</td><td>Check-in</td>
-          <td><div class="actions">
-            <button class="smallBtn" onclick="viewRow(&#39;inv&#39;,2)">VER</button>
-            <button class="smallBtn icon secondary" title="Ajustar" onclick="toast(&#39;Ajuste por auditoria (demo).&#39;)">⚙</button>
-          </div></td></tr></tbody>
-        </table>
-
-        <!-- TO -->
-        <table id="toTable" style="display: none;">
-          <thead>
-            <tr>
-              <th>TO</th><th>Origem</th><th>Destino</th><th>Qtde</th><th>Progresso</th><th>Status</th><th>Exceções</th><th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="toTbody"><tr>
-          <td>TO-00017</td><td>CY Principal</td><td>Site Externo A</td><td>18</td><td>44%</td><td>Em Execução</td><td>1</td>
-          <td><div class="actions">
-            <button class="smallBtn" onclick="viewRow(&#39;to&#39;,0)">VER</button>
-            <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
-          </div></td></tr><tr>
-          <td>TO-00018</td><td>Site Externo A</td><td>CY Principal</td><td>12</td><td>0%</td><td>Aprovada</td><td>0</td>
-          <td><div class="actions">
-            <button class="smallBtn" onclick="viewRow(&#39;to&#39;,1)">VER</button>
-            <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
-          </div></td></tr></tbody>
-        </table>
-
-
-        <!-- Gate -->
-        <table id="gateTable" style="display: table;">
-          <thead>
-            <tr>
-              <th>Timestamp</th><th>Ação</th><th>Site</th><th>Lane</th><th>Appointment</th>
-              <th>Placa</th><th>Motorista</th><th>CNTR</th><th>ISO</th><th>Empty/Full</th><th>Seal</th><th>Ref</th>
-              <th>Validação</th><th>Evidências</th><th>Decisão</th><th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="gateTbody"><tr>
-          <td>2026-01-04 20:10:12</td><td>Gate In</td><td>Site Externo A</td><td>Lane 01</td><td>APT-2026-000123</td>
-          <td>ABC1D23</td><td>000.000.000-00</td><td>MSCU1234567</td><td>40HC</td><td>Empty</td><td>SEAL987654</td><td>TO-00017</td>
-          <td>OK</td><td>Completo</td><td>Liberado</td>
-          <td>
-            <div class="actions">
-              <button class="smallBtn" onclick="toast(&#39;VER: MSCU1234567 • Gate In (2026-01-04 20:10:12)&#39;)">VER</button>
-              <button class="smallBtn icon danger" title="Excluir" onclick="deleteGate(0)">🗑</button>
-            </div>
-          </td></tr></tbody>
-        </table>
-
-      </div>
-
-      <div class="foot"><span id="countInfo">1 item(ns)</span></div>
-    </div>
-
-    <div id="toast" class="toast" role="status" aria-live="polite">Visualização gerada.</div>
+      </section>
+    </main>
   </div>
 
   <script>
-    const $ = (id)=>document.getElementById(id);
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const KEY="CY_INSPECT_AVARIAS_WHITE_UI_v1";
+    const $=(q)=>document.querySelector(q);
+    const $$=(q)=>Array.from(document.querySelectorAll(q));
+    let S=load();
 
-    function toast(msg){
-      const t = $("toast");
-      t.textContent = msg;
-      t.classList.add("show");
-      clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(()=>t.classList.remove("show"), 2600);
+    function load(){
+      try{
+        const raw=localStorage.getItem(KEY);
+        return raw ? Object.assign({inspections:[],damages:[]}, JSON.parse(raw)) : {inspections:[],damages:[]};
+      }catch(e){ return {inspections:[],damages:[]}; }
     }
+    function persist(){
+      localStorage.setItem(KEY, JSON.stringify(S));
+      $("#pillInspect").textContent=S.inspections.length;
+      $("#pillAvarias").textContent=S.damages.length;
+    }
+    function uid(prefix){
+      const d=new Date(); const p=n=>String(n).padStart(2,"0");
+      return `${prefix}-${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;
+    }
+    function fmt(iso){
+      const d=new Date(iso); const p=n=>String(n).padStart(2,"0");
+      return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`;
+    }
+    function tagSev(sev){
+      const cls=sev==="BAIXA"?"ok":(sev==="MÉDIA"?"warn":"bad");
+      return `<span class="tag ${cls}"><span class="dot"></span>${sev}</span>`;
+    }
+    function tagStatus(status){return `<span class="tag info"><span class="dot"></span>${status}</span>`;}
 
-    /* Tabs */
-    const tabs = Array.from(document.querySelectorAll(".tab"));
-    const panes = ["tab1","tab2","tab3","tab4"].map(id=>$(id));
+    function setPage(page){
+      $$(".page").forEach(p=>p.classList.remove("active"));
+      $("#page-"+page).classList.add("active");
+      $$("#nav a").forEach(a=>a.classList.remove("active"));
+      $(`#nav a[data-page="${page}"]`).classList.add("active");
 
-    tabs.forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        tabs.forEach(b=>b.classList.remove("active"));
-        btn.classList.add("active");
-        const target = btn.dataset.tab;
-        panes.forEach(p=>p.style.display = (p.id===target) ? "block" : "none");
-        tabs.forEach(b=>b.setAttribute("aria-selected", b===btn ? "true" : "false"));
-        updateSharedListForActiveTab(target);
+      const meta={
+        inspect:["CY | Inspect","Registrar inspeção e gerar avaria."],
+        avarias:["CY | Avarias","Registrar avaria com fotos/evidências e consultar lista."],
+        relatorios:["CY | Relatórios","Placeholder para KPIs/exportações."]
+      };
+      $("#pageTitle").textContent=meta[page][0];
+      $("#pageSub").textContent=meta[page][1];
+      if(page==="inspect") renderInspect();
+      if(page==="avarias") renderAvarias();
+    }
+    $$("#nav a").forEach(a=>a.addEventListener("click",()=>setPage(a.getAttribute("data-page"))));
+
+    // Inspect
+    function resetInspect(){
+      $("#i_cntr").value=""; $("#i_tipo").value="GATE IN"; $("#i_vinc").value="";
+      $("#i_resp").value=""; $("#i_sev").value="BAIXA"; $("#i_status").value="RASCUNHO"; $("#i_desc").value="";
+    }
+    function saveInspect(){
+      const cntr=$("#i_cntr").value.trim().toUpperCase();
+      if(!cntr){ alert("Informe o CNTR."); return; }
+      S.inspections.unshift({
+        id:uid("INSP"), cntr, tipo:$("#i_tipo").value, vinc:$("#i_vinc").value.trim(),
+        resp:$("#i_resp").value.trim(), sev:$("#i_sev").value, status:$("#i_status").value,
+        desc:$("#i_desc").value.trim(), createdAt:new Date().toISOString()
       });
+      persist(); renderInspect(); resetInspect(); alert("Inspeção salva (demo).");
+    }
+    function renderInspect(){
+      const fcntr=$("#i_fcntr").value.trim().toUpperCase();
+      const fstatus=$("#i_fstatus").value;
+
+      const list=S.inspections
+        .filter(x=>!fcntr||x.cntr.includes(fcntr))
+        .filter(x=>!fstatus||x.status===fstatus)
+        .sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+
+      const el=$("#i_list");
+      if(!list.length){
+        el.innerHTML=`<div class="item" style="cursor:default"><div style="color:rgba(71,85,105,.95)">Nenhum registro.</div><div class="mono">—</div></div>`;
+        return;
+      }
+      el.innerHTML=list.map(x=>`
+        <div class="item" data-id="${x.id}">
+          <div>
+            <div><b>${x.cntr}</b> <span class="mono" style="opacity:.70">• ${x.id}</span></div>
+            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
+              ${tagSev(x.sev)} ${tagStatus(x.status)}
+              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>${x.tipo}</span>
+            </div>
+          </div>
+          <div class="mono" style="opacity:.60">${fmt(x.createdAt)}</div>
+        </div>`).join("");
+
+      el.querySelectorAll(".item[data-id]").forEach(r=>r.addEventListener("click",()=>{
+        const x=S.inspections.find(z=>z.id===r.getAttribute("data-id"));
+        alert(
+          `Inspeção ${x.id}\nCNTR: ${x.cntr}\nTipo: ${x.tipo}\nStatus: ${x.status}\nSeveridade: ${x.sev}\n` +
+          `Vínculo: ${x.vinc || "—"}\nResp: ${x.resp || "—"}\n\nDescrição:\n${x.desc || "—"}`
+        );
+      }));
+    }
+    function genAvariaFromInspect(){
+      const cntr=$("#i_cntr").value.trim().toUpperCase();
+      if(!cntr){ alert("Informe o CNTR antes de gerar avaria."); return; }
+      setPage("avarias");
+      $("#a_cntr").value=cntr;
+      $("#a_origem").value="VISTORIA";
+      $("#a_sev").value=$("#i_sev").value;
+      $("#a_status").value="ABERTA";
+      $("#a_area").value="PORTAS";
+      $("#a_tipo").value=(($("#i_sev").value==="CRÍTICA"||$("#i_sev").value==="ALTA") ? "DESALINHAMENTO" : "AMASSADO");
+      $("#a_desc").value=`Gerado a partir de Inspect. Observações: ${($("#i_desc").value||"—")}`;
+      avDraftPhotos=[]; renderChips();
+    }
+    $("#i_save").addEventListener("click", saveInspect);
+    $("#i_gen").addEventListener("click", genAvariaFromInspect);
+    $("#i_new").addEventListener("click", resetInspect);
+    $("#i_apply").addEventListener("click", renderInspect);
+    $("#i_clear").addEventListener("click", ()=>{ $("#i_fcntr").value=""; $("#i_fstatus").value=""; renderInspect(); });
+
+    // Avarias (with photos)
+    let avDraftPhotos=[];
+    function renderChips(){
+      const el=$("#a_chips"); el.innerHTML="";
+      if(!avDraftPhotos.length){
+        el.innerHTML=`<span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>sem fotos</span>`;
+        return;
+      }
+      avDraftPhotos.forEach(name=>{
+        const chip=document.createElement("span");
+        chip.className="chip";
+        chip.innerHTML=`📷 ${name} <span class="x">✕</span>`;
+        chip.title="Clique para remover";
+        chip.addEventListener("click",()=>{ avDraftPhotos=avDraftPhotos.filter(n=>n!==name); renderChips(); });
+        el.appendChild(chip);
+      });
+    }
+    $("#a_files").addEventListener("change",(e)=>{
+      Array.from(e.target.files||[]).forEach(f=>{ if(!avDraftPhotos.includes(f.name)) avDraftPhotos.push(f.name); });
+      e.target.value=""; renderChips();
     });
 
-    function showTable(id){
-      ["layoutTable","inventoryTable","toTable","gateTable"].forEach(t=>$(t).style.display="none");
-      $(id).style.display="table";
+    function resetAvaria(){
+      $("#a_cntr").value=""; $("#a_origem").value="VISTORIA"; $("#a_sev").value="MÉDIA"; $("#a_status").value="ABERTA";
+      $("#a_area").value="PORTAS"; $("#a_tipo").value="AMASSADO"; $("#a_desc").value="";
+      avDraftPhotos=[]; renderChips();
     }
-    function getActiveTableId(){
-      if($("layoutTable").style.display!=="none") return "layoutTable";
-      if($("inventoryTable").style.display!=="none") return "inventoryTable";
-      if($("toTable").style.display!=="none") return "toTable";
-      return "gateTable";
-    }
-    function updateCountInfo(){
-      const active = getActiveTableId();
-      const rows = Array.from($(active).querySelectorAll("tbody tr"));
-      const shown = rows.filter(r=>r.style.display!=="none").length;
-      $("countInfo").textContent = `${shown} item(ns)`;
-    }
-    function filterTable(){
-      const q = $("searchInput").value.trim().toLowerCase();
-      const active = getActiveTableId();
-      const rows = Array.from($(active).querySelectorAll("tbody tr"));
-      rows.forEach(tr=>{
-        const txt = tr.textContent.toLowerCase();
-        tr.style.display = txt.includes(q) ? "" : "none";
+    function saveAvaria(){
+      const cntr=$("#a_cntr").value.trim().toUpperCase();
+      if(!cntr){ alert("Informe o CNTR."); return; }
+      S.damages.unshift({
+        id:uid("AVA"), cntr,
+        origem:$("#a_origem").value, sev:$("#a_sev").value, status:$("#a_status").value,
+        area:$("#a_area").value, tipo:$("#a_tipo").value, desc:$("#a_desc").value.trim(),
+        photos:avDraftPhotos.slice(), createdAt:new Date().toISOString()
       });
-      updateCountInfo();
+      persist(); renderAvarias(); resetAvaria(); alert("Avaria salva (demo).");
     }
+    function renderAvarias(){
+      const fcntr=$("#a_fcntr").value.trim().toUpperCase();
+      const fstatus=$("#a_fstatus").value;
+      const fsev=$("#a_fsev").value;
+      const forigem=$("#a_forigem").value;
 
-    function updateSharedListForActiveTab(tabId){
-      $("searchInput").value = "";
-      if(tabId==="tab1"){
-        $("listTitle").textContent = "Quadras Cadastradas";
-        showTable("layoutTable");
-      } else if(tabId==="tab2"){
-        $("listTitle").textContent = "Inventário Atual";
-        showTable("inventoryTable");
-      } else if(tabId==="tab3"){
-        $("listTitle").textContent = "Transfer Orders Cadastradas";
-        showTable("toTable");
-      } else {
-        $("listTitle").textContent = "Gate Event Log";
-        showTable("gateTable");
+      const list=S.damages
+        .filter(x=>!fcntr||x.cntr.includes(fcntr))
+        .filter(x=>!fstatus||x.status===fstatus)
+        .filter(x=>!fsev||x.sev===fsev)
+        .filter(x=>!forigem||x.origem===forigem)
+        .sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+
+      const el=$("#a_list");
+      if(!list.length){
+        el.innerHTML=`<div class="item" style="cursor:default"><div style="color:rgba(71,85,105,.95)">Nenhum registro.</div><div class="mono">—</div></div>`;
+        return;
       }
-      filterTable();
-    }
 
-    /* Demo data */
-    let currentDir = "N";
-    let stackFrom = "Row";
-
-    const dirAngles = { N:0, NE:45, E:90, SE:135, S:180, SO:225, O:270, NO:315 };
-    const dirNames  = { N:"Norte", NE:"Nordeste", E:"Leste", SE:"Sudeste", S:"Sul", SO:"Sudoeste", O:"Oeste", NO:"Noroeste" };
-
-    let layoutRows = [
-      {site:"Site Externo A", quadra:"Quadra 1", bays:7, rows:13, tiers:5, dir:"Norte", muro:"Sim", stackFrom:"Row", cap:"1.440 (X tiers)"},
-      {site:"Site Externo A", quadra:"Quadra 2", bays:10, rows:10, tiers:6, dir:"Sudoeste", muro:"Não", stackFrom:"Row", cap:"3.840 (X tiers)"},
-      {site:"Site Externo B", quadra:"Quadra 1", bays:12, rows:12, tiers:4, dir:"Leste", muro:"Sim", stackFrom:"Tier", cap:"1.792 (X tiers)"},
-    ];
-
-    let inventoryRows = [
-      {unit:"MSCU1234567", type:"Empty",  site:"Site Externo A", quadra:"Quadra 1", pos:"B03-R07-T1", status:"Presente", hold:"—", last:"Check-in"},
-      {unit:"CMAU7654321", type:"Full",   site:"Site Externo A", quadra:"Quadra 2", pos:"B05-R02-T1", status:"Presente", hold:"—", last:"Move interno"},
-      {unit:"TGHU2468135", type:"Reefer", site:"Site Externo B", quadra:"Quadra 1", pos:"B02-R09-T1", status:"Presente", hold:"Temp", last:"Check-in"},
-    ];
-
-    let toRows = [
-      {to:"TO-00017", orig:"CY Principal", dest:"Site Externo A", qty:18, prog:"44%", status:"Em Execução", exc:1},
-      {to:"TO-00018", orig:"Site Externo A", dest:"CY Principal", qty:12, prog:"0%",  status:"Aprovada",    exc:0},
-    ];
-
-    /* Render tables */
-    function renderLayoutTable(){
-      const tb = $("layoutTbody"); tb.innerHTML = "";
-      layoutRows.forEach((r, idx)=>{
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${r.site}</td><td>${r.quadra}</td><td>${r.bays}</td><td>${r.rows}</td><td>${r.tiers}</td>
-          <td>${r.dir}</td><td>${r.muro}</td><td>${r.stackFrom}</td><td>${r.cap}</td>
-          <td>
-            <div class="actions">
-              <button class="smallBtn" onclick="viewRow('layout',${idx})">VER</button>
-              <button class="smallBtn icon secondary" title="Editar" onclick="toast('Editar (demo): use o formulário e “Cadastrar”.')">✎</button>
-              <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow('layout',${idx})">🗑</button>
+      el.innerHTML=list.map(x=>`
+        <div class="item" data-id="${x.id}">
+          <div>
+            <div><b>${x.cntr}</b> <span class="mono" style="opacity:.70">• ${x.id}</span></div>
+            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
+              ${tagSev(x.sev)} ${tagStatus(x.status)}
+              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>${x.area}</span>
+              <span class="tag"><span class="dot" style="background:rgba(37,99,235,.85)"></span>${x.origem}</span>
+              <span class="tag"><span class="dot" style="background:rgba(16,185,129,.85)"></span>📷 ${(x.photos?.length||0)} foto(s)</span>
             </div>
-          </td>`;
-        tb.appendChild(tr);
-      });
-      updateCountInfo();
+          </div>
+          <div class="mono" style="opacity:.60">${fmt(x.createdAt)}</div>
+        </div>`).join("");
+
+      el.querySelectorAll(".item[data-id]").forEach(r=>r.addEventListener("click",()=>{
+        const x=S.damages.find(z=>z.id===r.getAttribute("data-id"));
+        alert(
+          `Avaria ${x.id}\nCNTR: ${x.cntr}\nOrigem: ${x.origem}\nStatus: ${x.status}\nSeveridade: ${x.sev}\n` +
+          `Área: ${x.area}\nTipo: ${x.tipo}\nFotos: ${(x.photos&&x.photos.length)?x.photos.join(", "):"—"}\n\nDescrição:\n${x.desc||"—"}`
+        );
+      }));
     }
 
-    function renderInventoryTable(){
-      const tb = $("invTbody"); tb.innerHTML = "";
-      inventoryRows.forEach((r, idx)=>{
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${r.unit}</td><td>${r.type}</td><td>${r.site}</td><td>${r.quadra}</td><td>${r.pos}</td>
-          <td>${r.status}</td><td>${r.hold}</td><td>${r.last}</td>
-          <td><div class="actions">
-            <button class="smallBtn" onclick="viewRow('inv',${idx})">VER</button>
-            <button class="smallBtn icon secondary" title="Ajustar" onclick="toast('Ajuste por auditoria (demo).')">⚙</button>
-          </div></td>`;
-        tb.appendChild(tr);
-      });
-      updateCountInfo();
-    }
+    $("#a_save").addEventListener("click", saveAvaria);
+    $("#a_new").addEventListener("click", resetAvaria);
+    $("#a_apply").addEventListener("click", renderAvarias);
+    $("#a_clear").addEventListener("click", ()=>{ $("#a_fcntr").value=""; $("#a_fstatus").value=""; $("#a_fsev").value=""; $("#a_forigem").value=""; renderAvarias(); });
 
-    function renderToTable(){
-      const tb = $("toTbody"); tb.innerHTML = "";
-      toRows.forEach((r, idx)=>{
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${r.to}</td><td>${r.orig}</td><td>${r.dest}</td><td>${r.qty}</td><td>${r.prog}</td><td>${r.status}</td><td>${r.exc}</td>
-          <td><div class="actions">
-            <button class="smallBtn" onclick="viewRow('to',${idx})">VER</button>
-            <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
-          </div></td>`;
-        tb.appendChild(tr);
-      });
-      updateCountInfo();
-    }
-
-    function viewRow(type, idx){
-      if(type==="layout"){
-        const r = layoutRows[idx];
-        toast(`VER: ${r.site} / ${r.quadra} • ${r.bays}x${r.rows} • ${r.dir}`);
-      } else if(type==="inv"){
-        const r = inventoryRows[idx];
-        toast(`VER: ${r.unit} • ${r.site}/${r.quadra} • ${r.pos}`);
-      } else {
-        const r = toRows[idx];
-        toast(`VER: ${r.to} • ${r.orig} → ${r.dest} • ${r.status}`);
-      }
-    }
-
-    function deleteRow(type, idx){
-      if(!confirm("Excluir este registro? (demo)")) return;
-      if(type==="layout") layoutRows.splice(idx,1);
-      renderLayoutTable(); toast("Registro excluído (demo).");
-    }
-
-    /* Export CSV */
-    function exportActiveTable(){
-      const active = getActiveTableId();
-      const filename = active==="layoutTable" ? "quadras_vsc.csv" : active==="inventoryTable" ? "inventario_vsc.csv" : active==="toTable" ? "transfer_orders.csv" : "gate_event_log.csv";
-      exportTableCsv(active, filename);
-    }
-    function exportTableCsv(tableId, filename){
-      const table = $(tableId);
-      const rows = Array.from(table.querySelectorAll("tr")).filter(r=>r.style.display!=="none");
-      const csv = rows.map(row=>{
-        const cells = Array.from(row.querySelectorAll("th,td"));
-        return cells.map(c => `"${c.textContent.replaceAll('"','""').trim()}"`).join(",");
-      }).join("\n");
-      const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a"); a.href = url; a.download = filename;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      toast(`Exportado: ${filename}`);
-    }
-
-    /* Layout (grid) */
-    function renderAxes(rows, bays, yId, xId){
-      const y = $(yId), x = $(xId);
-      y.innerHTML = ""; x.innerHTML = "";
-      for(let r=1;r<=rows;r++){ const d=document.createElement("div"); d.textContent=r; y.appendChild(d); }
-      x.style.gridTemplateColumns = `repeat(${bays}, 40px)`;
-      for(let b=0;b<bays;b++){ const s=document.createElement("span"); s.textContent=letters[b]||"?"; x.appendChild(s); }
-    }
-
-    function renderGrid(rows, bays, gridId, pattern){
-      const grid = $(gridId);
-      grid.innerHTML = "";
-      grid.style.gridTemplateColumns = `repeat(${bays}, 40px)`;
-      for(let r=1;r<=rows;r++){
-        for(let b=1;b<=bays;b++){
-          const d=document.createElement("div"); d.className="slot";
-          if(pattern && (r+b)%5===0) d.classList.add("occ");
-          d.addEventListener("click", ()=>d.classList.toggle("occ"));
-          grid.appendChild(d);
-        }
-      }
-    }
-
-    function generateLayout(){
-      const bays = parseInt($("bayQty").value,10);
-      const rows = parseInt($("rowQty").value,10);
-      renderAxes(rows, bays, "yAxis", "xAxis");
-      renderGrid(rows, bays, "yardGrid", false);
-
-      // Tab2 occupancy grid (demo pattern)
-      renderAxes(rows, bays, "yAxis2", "xAxis2");
-      renderGrid(rows, bays, "yardGrid2", true);
-
-      toast("Visualização gerada.");
-    }
-
-    function applyWalls(){
-      $("yardWallsTop").innerHTML    = $("wTop").checked    ? `<div class="wallLine" style="height:6px;width:86%"></div>` : "";
-      $("yardWallsBottom").innerHTML = $("wBottom").checked ? `<div class="wallLine" style="height:6px;width:86%"></div>` : "";
-      $("yardWallsLeft").innerHTML   = $("wLeft").checked   ? `<div class="wallLine" style="width:6px;height:86%"></div>` : "";
-      $("yardWallsRight").innerHTML  = $("wRight").checked  ? `<div class="wallLine" style="width:6px;height:86%"></div>` : "";
-    }
-
-    function clearTab1(){
-      $("siteName").value=""; $("siteOperator").value=""; $("quadraName").value="";
-      $("capMax").value="XXX (X Tiers)"; $("muro").value="nao"; $("restricoes").value="Empty/Full (padrão)";
-      $("altMax").value="--"; $("bayQty").value="7"; $("rowQty").value="13"; $("tierQty").value="5";
-      $("wTop").checked=$("wLeft").checked=$("wRight").checked=$("wBottom").checked=false;
-      applyWalls(); generateLayout(); toast("Campos limpos.");
-    }
-
-    /* Direção + toggle */
-    function setDir(dir){
-      currentDir = dir;
-      document.querySelectorAll(".dirbtn").forEach(b=>b.classList.toggle("active", b.dataset.dir===dir));
-      $("needleSvg").style.transform = `rotate(${dirAngles[dir]||0}deg)`;
-    }
-    function toggleRowTier(){
-      const t = $("toggleRowTier");
-      t.classList.toggle("on");
-      stackFrom = t.classList.contains("on") ? "Tier" : "Row";
-      toast(`Empilhar a partir de: ${stackFrom}`);
-    }
-
-    function saveSiteQuadra(){
-      const site = $("siteName").value.trim() || "Site Externo (sem nome)";
-      const quadra = $("quadraName").value.trim() || "Quadra (sem nome)";
-      const bays = parseInt($("bayQty").value,10);
-      const rows = parseInt($("rowQty").value,10);
-      const tiers = parseInt($("tierQty").value,10);
-      const dirLabel = dirNames[currentDir] || "Norte";
-      const muroLabel = $("muro").value==="nao" ? "Não" : "Sim";
-      const cap = $("capMax").value.trim() || `${(bays*rows)} (X tiers)`;
-
-      layoutRows.unshift({site, quadra, bays, rows, tiers, dir:dirLabel, muro:muroLabel, stackFrom, cap});
-      renderLayoutTable();
-      toast("Site/Quadra cadastrados (demo).");
-    }
-
-    /* Tab2 ops (demo) */
-    function quickCheck(mode){
-      const unit = prompt(`Informe o CNTR para Check-${mode==="in"?"in":"out"} (demo):`, "MSCU0000000");
-      if(!unit) return;
-
-      if(mode==="in"){
-        inventoryRows.unshift({
-          unit,
-          type: $("invTipo").value==="Todos" ? "Empty" : $("invTipo").value,
-          site: $("invSite").value,
-          quadra: $("invQuadra").value,
-          pos: `B${String(Math.floor(Math.random()*7)+1).padStart(2,"0")}-R${String(Math.floor(Math.random()*13)+1).padStart(2,"0")}-T1`,
-          status:"Presente",
-          hold:"—",
-          last:"Check-in"
-        });
-        toast(`Check-in registrado: ${unit}`);
-      }else{
-        const idx = inventoryRows.findIndex(r=>r.unit===unit);
-        if(idx>=0){ inventoryRows.splice(idx,1); toast(`Check-out registrado: ${unit}`); }
-        else toast("CNTR não encontrado no inventário (demo).");
-      }
-      renderInventoryTable();
-    }
-
-    function seedAudit(){
-      if(inventoryRows.length===0) return toast("Inventário vazio (demo).");
-      const i = Math.floor(Math.random()*inventoryRows.length);
-      inventoryRows[i].hold = "Diverg.";
-      inventoryRows[i].last = "Auditoria";
-      renderInventoryTable();
-      toast("Auditoria iniciada (demo): divergências marcadas.");
-    }
-
-    /* Tab3 ops (demo) */
-    function planTO(){
-      toast("Lista planejada gerada (demo). Agora publique a TO.");
-    }
-    function publishTO(){
-      const qty = 10 + Math.floor(Math.random()*18);
-      const done = Math.floor(qty*(0.2+Math.random()*0.6));
-      const id = `TO-${String(20+Math.floor(Math.random()*80)).padStart(5,"0")}`;
-      toRows.unshift({
-        to:id, orig:$("toOrig").value, dest:$("toDest").value,
-        qty, prog:`${Math.round((done/qty)*100)}%`, status:"Em Execução", exc:Math.floor(Math.random()*3)
-      });
-      renderToTable();
-      toast(`TO publicada: ${id} (demo).`);
-    }
-
-    
-    /* ------------------------------
-       TAB 4: Gate Control (demo)
-    ------------------------------ */
-    let gateRows = [
-      {ts:"2026-01-04 20:10:12", action:"Gate In", site:"Site Externo A", lane:"Lane 01", appt:"APT-2026-000123",
-       truck:"ABC1D23", driver:"000.000.000-00", cntr:"MSCU1234567", iso:"40HC", fullEmpty:"Empty", seal:"SEAL987654", docref:"TO-00017",
-       val:"OK", ev:"Completo", dec:"Liberado"}
-    ];
-
-    function renderGateTable(){
-      const tb = $("gateTbody"); tb.innerHTML = "";
-      gateRows.forEach((r, idx)=>{
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${r.ts}</td><td>${r.action}</td><td>${r.site}</td><td>${r.lane}</td><td>${r.appt}</td>
-          <td>${r.truck}</td><td>${r.driver}</td><td>${r.cntr}</td><td>${r.iso}</td><td>${r.fullEmpty}</td><td>${r.seal}</td><td>${r.docref}</td>
-          <td>${r.val}</td><td>${r.ev}</td><td>${r.dec}</td>
-          <td>
-            <div class="actions">
-              <button class="smallBtn" onclick="toast('VER: ${r.cntr} • ${r.action} (${r.ts})')">VER</button>
-              <button class="smallBtn icon danger" title="Excluir" onclick="deleteGate(${idx})">🗑</button>
-            </div>
-          </td>`;
-        tb.appendChild(tr);
-      });
-      updateCountInfo();
-    }
-
-    function deleteGate(idx){
-      if(!confirm("Excluir este evento do Gate Log? (demo)")) return;
-      gateRows.splice(idx,1);
-      renderGateTable();
-      toast("Evento excluído (demo).");
-    }
-
-    function nowTs(){
-      const d = new Date();
-      const pad = (n)=>String(n).padStart(2,"0");
-      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-    }
-
-    function setError(wrapId, on){
-      const el = $(wrapId);
-      if(!el) return;
-      el.classList.toggle("error", !!on);
-    }
-    function valText(inputId, wrapId){
-      const v = ($(inputId).value||"").trim();
-      const bad = (v.length===0);
-      setError(wrapId, bad);
-      return !bad;
-    }
-    function valSelect(selectId, wrapId){
-      const v = ($(selectId).value||"");
-      const bad = (v.trim().length===0);
-      setError(wrapId, bad);
-      return !bad;
-    }
-
-    function getEvidenceState(){
-      const need = ["c_ocr","c_plate","c_seal"];
-      const ok = need.every(id => !$(id).classList.contains("off"));
-      const any = ["c_ocr","c_plate","c_seal","c_photo","c_damage"].some(id => !$(id).classList.contains("off"));
-      return {ok, any};
-    }
-
-    function updateDecisionUI(validOk){
-      const ev = getEvidenceState();
-      const valBadge = $("valBadge");
-      const evBadge  = $("evBadge");
-      const decBadge = $("decBadge");
-
-      if(validOk){ valBadge.textContent="OK"; valBadge.className="badge ok"; }
-      else { valBadge.textContent="Pendente"; valBadge.className="badge warn"; }
-
-      if(ev.ok){ evBadge.textContent="Completo"; evBadge.className="badge ok"; }
-      else { evBadge.textContent = ev.any ? "Parcial" : "Incompleto"; evBadge.className="badge warn"; }
-
-      if(validOk && ev.ok){ decBadge.textContent="Liberado"; decBadge.className="badge ok"; }
-      else { decBadge.textContent="Bloqueado"; decBadge.className="badge warn"; }
-    }
-
-    function isGateFormFilled(){
-      const ids = ["gAction","gSite","gLane","gAppt","gTruck","gDriver","gCntr","gIso","gFullEmpty","gSeal","gDocref","gTs"];
-      return ids.every(i => (($(i).value||"")+"").trim().length>0);
-    }
-
-    function toggleChip(id){
-      const el = $(id);
-      el.classList.toggle("off");
-      updateDecisionUI(isGateFormFilled());
-    }
-
-    function gateValidate(){
-      const ok =
-        valSelect("gAction","g_action") &&
-        valSelect("gSite","g_site") &&
-        valSelect("gLane","g_lane") &&
-        valText("gAppt","g_appt") &&
-        valText("gTruck","g_truck") &&
-        valText("gDriver","g_driver") &&
-        valText("gCntr","g_cntr") &&
-        valSelect("gIso","g_iso") &&
-        valSelect("gFullEmpty","g_fullEmpty") &&
-        valText("gSeal","g_seal") &&
-        valText("gDocref","g_docref") &&
-        valText("gTs","g_ts");
-
-      updateDecisionUI(ok);
-      if(!ok){
-        toast("Campos obrigatórios pendentes (Gate).");
-        const first = document.querySelector("#tab4 .error");
-        if(first) first.scrollIntoView({behavior:"smooth", block:"center"});
-      } else {
-        toast("Validação OK (Gate).");
-      }
-      return ok;
-    }
-    function gateValidateOnly(){ gateValidate(); }
-
-    function gateClear(){
-      ["gAction","gSite","gLane","gIso","gFullEmpty"].forEach(id=>$(id).value="");
-      ["gAppt","gTruck","gDriver","gCntr","gSeal","gDocref"].forEach(id=>$(id).value="");
-      document.querySelectorAll("#tab4 .error").forEach(e=>e.classList.remove("error"));
-      ["c_ocr","c_plate","c_seal","c_photo","c_damage"].forEach(id=>$(id).classList.remove("off"));
-      $("gTs").value = nowTs();
-      updateDecisionUI(false);
-      toast("Campos limpos (Gate).");
-    }
-
-    function gateRegister(){
-      const ok = gateValidate();
-      if(!ok) return;
-
-      const ev = getEvidenceState();
-      const decision = (ok && ev.ok) ? "Liberado" : "Bloqueado";
-
-      gateRows.unshift({
-        ts: $("gTs").value.trim(),
-        action: $("gAction").value,
-        site: $("gSite").value,
-        lane: $("gLane").value,
-        appt: $("gAppt").value.trim(),
-        truck: $("gTruck").value.trim(),
-        driver: $("gDriver").value.trim(),
-        cntr: $("gCntr").value.trim().toUpperCase(),
-        iso: $("gIso").value,
-        fullEmpty: $("gFullEmpty").value,
-        seal: $("gSeal").value.trim(),
-        docref: $("gDocref").value.trim(),
-        val: "OK",
-        ev: ev.ok ? "Completo" : (ev.any ? "Parcial" : "Incompleto"),
-        dec: decision
-      });
-
-      renderGateTable();
-      toast(`Evento registrado: ${$("gAction").value} • ${$("gCntr").value.trim().toUpperCase()} • ${decision}`);
-    }
-
-    // live validation Gate
-    const gLive = [
-      ["gAction","g_action","select"],["gSite","g_site","select"],["gLane","g_lane","select"],
-      ["gAppt","g_appt","text"],["gTruck","g_truck","text"],["gDriver","g_driver","text"],
-      ["gCntr","g_cntr","text"],["gIso","g_iso","select"],["gFullEmpty","g_fullEmpty","select"],
-      ["gSeal","g_seal","text"],["gDocref","g_docref","text"]
-    ];
-    gLive.forEach(([id, wrap, typ])=>{
-      const el = $(id);
-      if(!el) return;
-      const fn = ()=> (typ==="text") ? valText(id,wrap) : valSelect(id,wrap);
-      el.addEventListener("input", ()=>{ fn(); updateDecisionUI(isGateFormFilled()); });
-      el.addEventListener("change", ()=>{ fn(); updateDecisionUI(isGateFormFilled()); });
+    // Seed/Reset
+    $("#seed").addEventListener("click", ()=>{
+      const now=Date.now();
+      S.inspections=[
+        {id:"INSP-20260105-151200",cntr:"ABCD1234567",tipo:"GATE IN",vinc:"CE 2026/000123",resp:"Inspetor 01",sev:"BAIXA",status:"ENCERRADA",desc:"Sem observações relevantes.",createdAt:new Date(now-3600e3).toISOString()},
+        {id:"INSP-20260105-141020",cntr:"TGHU0099887",tipo:"TRANSFERÊNCIA",vinc:"OS TRF-44821",resp:"Inspetor 03",sev:"ALTA",status:"EM ANÁLISE",desc:"Portas desalinhadas. Recomendar hold e repair.",createdAt:new Date(now-8600e3).toISOString()},
+      ];
+      S.damages=[
+        {id:"AVA-20260105-155500",cntr:"TGHU0099887",origem:"VISTORIA",sev:"ALTA",status:"EM ANÁLISE",area:"PORTAS",tipo:"DESALINHAMENTO",
+         desc:"Gerado após inspeção. Avaliar hold + encaminhar repair.",photos:["doors_alignment.png","seal_area_zoom.jpg"],createdAt:new Date(now-2200e3).toISOString()}
+      ];
+      persist(); renderInspect(); renderAvarias(); alert("Demo populada.");
     });
 
+    $("#reset").addEventListener("click", ()=>{
+      localStorage.removeItem(KEY);
+      S={inspections:[],damages:[]};
+      persist(); resetInspect(); resetAvaria(); renderChips(); renderInspect(); renderAvarias(); alert("Reset concluído.");
+    });
 
-/* Init */
-    function init(){
-      $("bayQty").value="7"; $("rowQty").value="13"; $("tierQty").value="5";
-      setDir("N"); generateLayout(); applyWalls();
-      renderLayoutTable(); renderInventoryTable(); renderToTable();
-      $("gTs").value = nowTs();
-      ["c_ocr","c_plate","c_seal","c_photo","c_damage"].forEach(id=>$(id).classList.remove("off"));
-      updateDecisionUI(false);
-      renderGateTable();
-      updateSharedListForActiveTab("tab1");
-    }
-    init();
+    // Init
+    persist(); resetInspect(); resetAvaria(); renderChips();
+    renderInspect(); renderAvarias(); setPage("inspect");
   </script>
 
 
