@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0051)file:///C:/Users/HxTos/Downloads/damage_web_v3.html -->
+<!-- saved from url=(0054)file:///C:/Users/HxTos/Downloads/damage_mobile_v3.html -->
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -341,6 +341,65 @@
     .btn:not(.primary):not(.light):not(.ghost){background:#f6f7f9;border:1px solid rgba(0,0,0,.10);color:#1c4450}
 
   
+/* =========================================================
+   MOBILE OPTIMIZATIONS (<= 720px)
+   ========================================================= */
+@media (max-width: 720px){
+  body{overflow:auto;}
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    padding:10px 12px;
+  }
+  .wrap{padding:12px !important;}
+  .card{border-radius:16px !important;}
+  .cardHeader{padding:12px 12px 10px !important; gap:10px !important;}
+  .title{font-size:18px !important; line-height:1.1 !important;}
+
+  /* Tabs: horizontal scroll */
+  .tabs{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    display:flex !important;
+    gap:8px !important;
+    padding-bottom:2px;
+  }
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{white-space:nowrap; flex:0 0 auto; padding:9px 12px !important; border-radius:999px !important;}
+
+  .content{padding:12px !important;}
+
+  /* Damage layouts: stack */
+  .grid{grid-template-columns:1fr !important; gap:12px !important;}
+  .row{grid-template-columns:1fr !important; gap:10px !important;}
+
+  /* Cards */
+  .content .card h2{padding:12px 12px 10px !important; font-size:14px !important;}
+  .content .body{padding:12px !important;}
+
+  /* Forms */
+  input, select, textarea{padding:11px 12px !important; border-radius:12px !important; font-size:14px !important;}
+  label{font-size:12px !important;}
+
+  /* Buttons */
+  .actions{gap:10px !important;}
+  .btn{width:100%; min-width:unset !important; padding:12px 14px !important; border-radius:12px !important; font-size:14px !important;}
+
+  /* List items */
+  .list .item{grid-template-columns:1fr !important; gap:8px !important;}
+}
+
+/* Extra small phones */
+@media (max-width: 420px){
+  .brand{min-width:44px}
+  .iconbtn{width:44px;height:44px}
+  .title{font-size:17px !important;}
+}
+
+
     /* 4-column row for CNTR + Size + Unit Type + Operation/Origin */
     .row.row4{grid-template-columns: 1.2fr .7fr .9fr 1.2fr;}
     @media (max-width: 720px){ .row.row4{grid-template-columns:1fr !important;} }
@@ -372,8 +431,8 @@
         <h1 class="title">Damage</h1>
 
         <div class="tabs" id="nav" role="tablist" aria-label="Damage Tabs">
-          <a class="tab" data-page="inspect" role="tab" aria-selected="false"><span class="pill" id="pillInspect">2</span> Inspeção</a>
-          <a class="tab active" data-page="avarias" role="tab" aria-selected="true"><span class="pill" id="pillAvarias">2</span> Avarias</a>
+          <a class="tab active" data-page="inspect" role="tab" aria-selected="true"><span class="pill" id="pillInspect">2</span> Inspeção</a>
+          <a class="tab" data-page="avarias" role="tab" aria-selected="false"><span class="pill" id="pillAvarias">2</span> Avarias</a>
 </div>
 
       </div>
@@ -381,14 +440,14 @@
       <div class="content">
 <div class="top">
         <div>
-          <h1 id="pageTitle">CY | Avarias</h1>
-          <div class="sub" id="pageSub">Registrar avaria com fotos/evidências e consultar lista.</div>
+          <h1 id="pageTitle">CY | Inspect</h1>
+          <div class="sub" id="pageSub">Registrar inspeção e gerar avaria.</div>
         </div>
         
       </div>
 
       <!-- INSPECT -->
-      <section class="page" id="page-inspect">
+      <section class="page active" id="page-inspect">
         <div class="grid">
           <section class="card">
             <h2>
@@ -525,7 +584,7 @@
       </section>
 
       <!-- AVARIAS -->
-      <section class="page active" id="page-avarias">
+      <section class="page" id="page-avarias">
         <div class="grid">
           <section class="card">
             <h2>
