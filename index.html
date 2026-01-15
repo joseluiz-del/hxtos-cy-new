@@ -1,1020 +1,819 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)file:///C:/Users/HxTos/Downloads/damage_mobile_v3.html -->
-<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- saved from url=(0070)file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#yard-04 -->
+<html lang="pt-br"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CY | Damage (Modelo VSC)</title>
+  <title>Catálogo de 20 Automações RPA para o HXtos CY</title>
   <style>
-:root{
-      --bg:#e9ecef; --card:#fff; --text:#1f2a37; --muted:#6b7280;
-      --line:#d9dde3; --teal:#00a6c8; --teal2:#028eaa;
-      --shadow:0 10px 22px rgba(16,24,40,.12);
-      --r12:12px; --r10:10px;
-      --focus:rgba(0,166,200,.28);
+    :root{
+      --ink:#0b2d5c;
+      --ink2:#143a73;
+      --muted:#4a5568;
+      --bg:#ffffff;
+      --panel:#f7fafc;
+      --grid:#d0d7e2;
+      --ok:#1a7f37;
+      --warn:#b54708;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Montserrat,Segoe UI,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    /* Top */
-    .topbar{
-      height:64px; position:sticky; top:0; z-index:5;
-      background:linear-gradient(90deg,var(--teal2),var(--teal));
-      display:flex; align-items:center; padding:0 16px; color:#fff;
-      box-shadow:0 6px 14px rgba(0,0,0,.12);
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial; color:#111; background:var(--bg);}
+    header{position:sticky;top:0;z-index:5;background:linear-gradient(90deg,var(--ink),#0e3b7a);color:#fff;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.15)}
+    header h1{margin:0;font-size:18px;letter-spacing:.2px}
+    header .sub{margin-top:6px;opacity:.9;font-size:13px}
+    .wrap{display:grid;grid-template-columns:320px 1fr;gap:0;min-height:100vh}
+    nav{border-right:1px solid var(--grid);background:#fbfdff;position:sticky;top:78px;align-self:start;max-height:calc(100vh - 78px);overflow:auto;padding:14px 12px}
+    nav .cat{margin:10px 0 6px;font-weight:700;color:var(--ink);font-size:13px}
+    nav a{display:block;text-decoration:none;color:#1f2937;padding:6px 8px;border-radius:8px;font-size:12.6px;line-height:1.25}
+    nav a:hover{background:var(--panel)}
+    main{padding:18px 22px}
+    .card{border:1px solid var(--grid);border-radius:14px;background:#fff;box-shadow:0 1px 0 rgba(16,24,40,.02);padding:16px 16px;margin:14px 0}
+    .id{display:inline-block;font-weight:800;color:var(--ink);font-size:12px;background:var(--panel);border:1px solid var(--grid);padding:4px 8px;border-radius:999px}
+    .title{margin:10px 0 6px;font-size:18px;color:var(--ink)}
+    .meta{display:grid;grid-template-columns:160px 1fr;gap:8px 12px;background:var(--panel);border:1px solid var(--grid);border-radius:12px;padding:12px;margin:12px 0}
+    .k{font-weight:700;color:#111;font-size:12.5px}
+    .v{color:#111;font-size:12.5px}
+    h2{margin:22px 0 8px;color:var(--ink);font-size:16px}
+    h3{margin:14px 0 6px;color:var(--ink2);font-size:13.5px}
+    ul,ol{margin:6px 0 10px 22px}
+    li{margin:4px 0}
+    .fields{width:100%;border-collapse:collapse;margin-top:8px}
+    .fields td{border:1px solid var(--grid);vertical-align:top;padding:10px;background:#fff;font-size:12.5px}
+    .fields td:first-child{width:170px;font-weight:800;background:var(--panel)}
+    .footer{margin:30px 0 10px;color:var(--muted);font-size:12px}
+    @media (max-width: 980px){
+      .wrap{grid-template-columns:1fr}
+      nav{position:relative;top:0;max-height:none}
     }
-    .iconbtn{
-      width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.28);
-      background:rgba(255,255,255,.12); display:grid; place-items:center; cursor:pointer;
-      transition:.15s ease;
-    }
-    .iconbtn:hover{transform:translateY(-1px);background:rgba(255,255,255,.18)}
-    .brand{flex:1;text-align:center;font-weight:900;letter-spacing:.10em;font-size:20px;user-select:none}
-    .wrap{max-width:1400px;margin:0 auto;padding:14px}
-    /* Card */
-    .card{background:var(--card);border-radius:var(--r12);box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.05);overflow:hidden}
-    .cardHeader{padding:16px 18px 10px;border-bottom:1px solid rgba(0,0,0,.06)}
-    .title{margin:0;font-size:26px;font-weight:900;color:var(--teal2)}
-    /* Tabs */
-    .tabs{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
-    .tab{
-      border:1px solid rgba(0,0,0,.10);background:#f7fbfc;color:#0e5564;
-      padding:10px 12px;border-radius:999px;cursor:pointer;font-weight:800;font-size:13px;
-      display:flex;align-items:center;gap:8px;transition:.15s ease;user-select:none;
-    }
-    .tab:hover{transform:translateY(-1px)}
-    .tab.active{background:rgba(0,166,200,.16);border-color:rgba(0,166,200,.35);color:#004c5c}
-    .pill{width:10px;height:10px;border-radius:999px;background:var(--teal2);box-shadow:0 0 0 4px rgba(0,166,200,.16)}
-    .content{padding:14px 16px 16px}
-    .twoCol{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
-    @media (max-width:1060px){.twoCol{grid-template-columns:1fr}}
-    .panel{
-      border:1px solid rgba(0,0,0,.08);border-radius:var(--r10);padding:14px;background:#fff;
-    }
-    .sub{margin:0 0 10px;font-weight:900;color:#0e5564;font-size:16px}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:520px){.grid2{grid-template-columns:1fr}}
-    .field{display:flex;flex-direction:column;gap:7px}
-    .label{font-size:12px;color:var(--muted);font-weight:800}
-    input,select{
-      border:1px solid rgba(0,0,0,.14);border-radius:8px;padding:10px 12px;outline:none;
-      background:#f2f2f2;color:#2b2b2b;font-size:13px;transition:.15s ease;
-    }
-    input:focus,select:focus{border-color:rgba(0,166,200,.55);box-shadow:0 0 0 4px var(--focus);background:#fff}
-    .btnrow{display:flex;gap:12px;justify-content:flex-end;align-items:center;margin-top:10px;flex-wrap:wrap}
-    .btn{
-      border:none;padding:10px 14px;border-radius:10px;font-weight:900;cursor:pointer;
-      transition:.15s ease;font-size:13px;min-width:150px;display:inline-flex;gap:10px;align-items:center;justify-content:center;
-    }
-    .btn.light{background:#bfefff;color:#0a6477}
-    .btn.primary{background:var(--teal2);color:#fff}
-    .btn.ghost{background:#f6f7f9;border:1px solid rgba(0,0,0,.10);color:#1c4450}
-    .btn:hover{transform:translateY(-1px);filter:brightness(.98)}
-    .divider{height:1px;background:rgba(0,0,0,.10);margin:12px 0}
-    .hint{margin:0;color:var(--muted);font-weight:700;font-size:12px;line-height:1.35}
-    /* Compass (direção empilhamento) */
-    .configGrid{display:grid;grid-template-columns:230px 1fr 1fr;gap:12px;align-items:start}
-    @media (max-width:920px){.configGrid{grid-template-columns:1fr}}
-    .compassWrap{display:flex;flex-direction:column;gap:10px}
-    .compassLabel{font-weight:900;color:#0e5564;font-size:13px}
-    .compass{
-      width:190px;height:190px;border-radius:999px;border:2px solid rgba(0,0,0,.12);position:relative;
-      background:radial-gradient(circle at 30% 30%,#fff,#f1f6f8);box-shadow:0 10px 18px rgba(0,0,0,.10);
-    }
-    .ring{position:absolute;inset:14px;border-radius:999px;border:1px solid rgba(0,0,0,.14)}
-    .cross{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
-    .cross::before,.cross::after{content:"";position:absolute;background:rgba(0,166,200,.65);border-radius:999px}
-    .cross::before{width:2px;height:150px}.cross::after{height:2px;width:150px}
-    .dirbtn{
-      position:absolute;width:34px;height:34px;border-radius:999px;background:#fff;border:1px solid rgba(0,0,0,.12);
-      display:grid;place-items:center;font-weight:900;font-size:11px;color:#0e5564;cursor:pointer;transition:.12s ease;
-    }
-    .dirbtn:hover{transform:translateY(-1px)}
-    .dirbtn.active{background:var(--teal2);color:#fff;box-shadow:0 8px 14px rgba(0,166,200,.25)}
-    .N{top:-10px;left:50%;transform:translateX(-50%)} .NE{top:16px;right:16px}
-    .E{top:50%;right:-10px;transform:translateY(-50%)} .SE{bottom:16px;right:16px}
-    .S{bottom:-10px;left:50%;transform:translateX(-50%)} .SO{bottom:16px;left:16px}
-    .O{top:50%;left:-10px;transform:translateY(-50%)} .NO{top:16px;left:16px}
-    .needle{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
-    .needle svg{width:96px;height:96px;opacity:.92;transform-origin:50% 50%}
-    /* Toggle (Row/Tier) */
-    .toggleRow{display:flex;align-items:center;gap:10px;margin-top:4px}
-    .toggle{
-      width:52px;height:28px;border-radius:999px;background:#dde3ea;border:1px solid rgba(0,0,0,.12);
-      position:relative;cursor:pointer;transition:.15s ease;
-    }
-    .toggle::after{
-      content:"";width:22px;height:22px;border-radius:999px;position:absolute;top:2px;left:2px;background:#fff;
-      box-shadow:0 4px 10px rgba(0,0,0,.12);transition:.15s ease;
-    }
-    .toggle.on{background:rgba(0,166,200,.28);border-color:rgba(0,166,200,.35)}
-    .toggle.on::after{left:28px;background:#eaffff}
-    .tag{font-size:12px;font-weight:900;color:#0e5564}
-    /* Visualização (grid) */
-    .vizPanel{border-left:1px solid rgba(0,0,0,.12);padding-left:18px}
-    @media (max-width:1060px){.vizPanel{border-left:none;padding-left:0;border-top:1px solid rgba(0,0,0,.12);padding-top:16px}}
-    .vizHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
-    .vizTitle{margin:0;font-size:14px;font-weight:900;color:#0e5564}
-    .walls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:12px;font-weight:800}
-    .ck{
-      display:flex;gap:6px;align-items:center;background:#f6f7f9;border:1px solid rgba(0,0,0,.10);
-      padding:6px 8px;border-radius:999px;cursor:pointer;user-select:none
-    }
-    .ck input{margin:0;width:16px;height:16px}
-    .yardWrap{display:grid;grid-template-columns:40px 1fr;gap:8px;align-items:start;margin-top:8px}
-    .yAxis{display:flex;flex-direction:column;gap:14px;padding-top:8px;align-items:flex-end;font-weight:900;color:#232a31}
-    .yard{
-      border-radius:12px;padding:10px 10px 6px;background:#fff;border:1px solid rgba(0,0,0,.10);
-      display:inline-block;position:relative;
-    }
-    .yardGrid{display:grid;gap:10px;justify-content:start;align-content:start}
-    .slot{
-      width:40px;height:40px;background:#dcdcdc;border-radius:3px;border:1px solid rgba(0,0,0,.06);
-      cursor:pointer;transition:.12s ease;position:relative;
-    }
-    .slot:hover{transform:translateY(-1px);filter:brightness(.98)}
-    .slot.occ{background:rgba(0,166,200,.28)}
-    .slot.occ::after{content:"";position:absolute;inset:10px;border-radius:2px;border:2px solid rgba(2,142,170,.75)}
-    .xAxis{display:grid;gap:10px;margin-left:40px;margin-top:8px;font-weight:900;color:#232a31}
-    .xAxis span{display:block;width:40px;text-align:center}
-    .yardWallsTop,.yardWallsBottom{position:absolute;left:10px;right:10px;height:10px;display:flex;justify-content:center;align-items:center;pointer-events:none}
-    .yardWallsTop{top:-2px}.yardWallsBottom{bottom:-2px}
-    .yardWallsLeft,.yardWallsRight{position:absolute;top:10px;bottom:10px;width:10px;display:flex;justify-content:center;align-items:center;pointer-events:none}
-    .yardWallsLeft{left:-2px}.yardWallsRight{right:-2px}
-    .wallLine{background:#cfd6dd;border-radius:999px}
-    /* Table */
-    .tableCard{margin-top:14px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:var(--r12);box-shadow:var(--shadow);overflow:hidden}
-    .tableHead{padding:16px 16px 10px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-    .tableTitle{margin:0;font-size:24px;font-weight:900;color:var(--teal2)}
-    .exportBtn{
-      border:none;background:var(--teal2);color:#fff;border-radius:12px;padding:12px 16px;font-weight:900;
-      cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-width:260px;justify-content:center;
-      transition:.15s ease;
-    }
-    .exportBtn:hover{filter:brightness(.98);transform:translateY(-1px)}
-    .searchbar{padding:10px 16px 0}
-    .search{
-      width:100%;border-radius:8px;background:#efefef;border:1px solid rgba(0,0,0,.12);
-      padding:11px 12px 11px 38px;outline:none;font-weight:800;
-      background-image:radial-gradient(circle at 14px 50%,rgba(0,0,0,.35) 2px,transparent 3px);
-      background-repeat:no-repeat;background-size:20px 20px;background-position:10px 50%;
-    }
-    table{width:100%;border-collapse:collapse;font-size:13px}
-    th,td{padding:12px 10px;border-bottom:1px solid rgba(0,0,0,.10);text-align:left;white-space:nowrap}
-    th{color:var(--teal2);font-weight:900;font-size:12px}
-    td{color:#2a2a2a;font-weight:800}
-    .actions{display:flex;gap:8px;align-items:center}
-    .smallBtn{border:none;background:var(--teal2);color:#fff;border-radius:7px;padding:8px 10px;font-weight:900;cursor:pointer;font-size:11px}
-    .smallBtn.icon{width:34px;padding:8px 0}
-    .smallBtn.secondary{background:#1aa2bb}.smallBtn.danger{background:#0f7e95}
-    .foot{padding:12px 16px;color:var(--muted);font-weight:800;font-size:12px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
-    /* Toast */
-    .toast{
-      position:fixed;bottom:16px;right:16px;background:#0e5564;color:#fff;padding:12px 14px;border-radius:12px;
-      box-shadow:0 14px 28px rgba(0,0,0,.20);opacity:0;transform:translateY(10px);transition:.18s ease;
-      max-width:420px;z-index:20;font-weight:900;font-size:13px
-    }
-    .toast.show{opacity:1;transform:translateY(0)}
-  
-    /* Required + validation */
-    :root{
-      --danger:#c1121f;
-      --dangerBg: rgba(193,18,31,.10);
-      --ok:#1f7a1f;
-      --amber:#a85d00;
-    }
-    .req{color:var(--danger);font-weight:900}
-    .error input,.error select{
-      border-color: var(--danger)!important;
-      background: var(--dangerBg)!important;
-      box-shadow: 0 0 0 4px rgba(193,18,31,.14)!important;
-    }
-    .errmsg{display:none;color:var(--danger);font-weight:900;font-size:12px;line-height:1.2}
-    .error .errmsg{display:block}
-
-    /* Gate Decision + chips */
-    .statusBox{
-      border:1px dashed rgba(0,0,0,.18);
-      border-radius:12px;
-      padding:12px;
-      background:#fbfdfe;
-      display:flex;flex-direction:column;gap:8px;
-    }
-    .statusLine{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:900;font-size:13px}
-    .badge{
-      padding:6px 10px;border-radius:999px;font-weight:900;font-size:12px;
-      border:1px solid rgba(0,0,0,.10);
-      background:#f6f7f9;color:#1c4450;
-    }
-    .badge.ok{background:rgba(31,122,31,.10);border-color:rgba(31,122,31,.22);color:var(--ok)}
-    .badge.warn{background:rgba(193,18,31,.08);border-color:rgba(193,18,31,.18);color:var(--danger)}
-    .badge.amber{background:rgba(168,93,0,.10);border-color:rgba(168,93,0,.20);color:var(--amber)}
-    .chipRow{display:flex;gap:8px;flex-wrap:wrap}
-    .chip{
-      display:inline-flex;gap:8px;align-items:center;
-      padding:8px 10px;border-radius:999px;
-      background:#f6f7f9;border:1px solid rgba(0,0,0,.10);
-      font-weight:900;font-size:12px;color:#0e5564;
-      cursor:pointer;user-select:none;transition:.12s ease;
-    }
-    .chip:hover{transform:translateY(-1px)}
-    .chip .dot{width:10px;height:10px;border-radius:999px;background:var(--teal2);box-shadow:0 0 0 4px rgba(0,166,200,.16)}
-    .chip.off{opacity:.55}
-    .chip.off .dot{background:#7b8794;box-shadow:none}
-
-
-    /* -----------------------------
-       DAMAGE ADAPTATION (MODEL UI)
-       ----------------------------- */
-
-    /* The original Damage prototype used a sidebar. We hide any leftover layout helpers. */
-    .app,.sidebar{display:none !important;}
-
-    /* Page switcher (kept from Damage JS) */
-    .page{display:none;}
-    .page.active{display:block;}
-
-    /* Inner header (from Damage) */
-    .top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-      margin-bottom:12px;
-      flex-wrap:wrap;
-    }
-    #pageTitle{margin:0;font-size:18px;font-weight:900;color:var(--teal2)}
-    #pageSub{margin-top:4px;color:var(--muted);font-weight:800;font-size:12px;line-height:1.35}
-
-    /* Two-column content used in Damage pages */
-    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
-    @media (max-width:1060px){.grid{grid-template-columns:1fr}}
-
-    /* Reuse "card" styling for nested cards, but soften the shadow */
-    .content .card{
-      box-shadow: 0 8px 18px rgba(16,24,40,.10);
-      border:1px solid rgba(0,0,0,.06);
-      border-radius:12px;
-      overflow:hidden;
-    }
-    .content .card h2{
-      margin:0;
-      padding:14px 16px 10px;
-      font-size:14px;
-      font-weight:900;
-      color:#0e5564;
-      border-bottom:1px solid rgba(0,0,0,.06);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .content .body{padding:14px 16px 16px}
-
-    /* Lists used in Damage (left panel) */
-    .list{
-      background:#fff;
-      border:1px solid rgba(0,0,0,.08);
-      border-radius:12px;
-      overflow:hidden;
-    }
-    .list .item{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:12px 12px;
-      border-top:1px solid rgba(0,0,0,.08);
-      cursor:pointer;
-      transition:.12s ease;
-    }
-    .list .item:first-child{border-top:none}
-    .list .item:hover{background:rgba(0,166,200,.10); transform:translateY(-1px)}
-
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
-
-    /* Tag pills (used by Damage JS) */
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border-radius:999px;
-      background:#f6f7f9;
-      border:1px solid rgba(0,0,0,.10);
-      font-weight:900;
-      font-size:12px;
-      color:#0e5564;
-      white-space:nowrap;
-      user-select:none;
-    }
-    .tag .dot{
-      width:10px;height:10px;border-radius:999px;
-      background:var(--teal2);
-      box-shadow:0 0 0 4px rgba(0,166,200,.16);
-    }
-    .tag.ok{background:rgba(31,122,31,.10);border-color:rgba(31,122,31,.18);color:var(--ok)}
-    .tag.ok .dot{background:var(--ok);box-shadow:0 0 0 4px rgba(31,122,31,.14)}
-    .tag.warn{background:rgba(168,93,0,.10);border-color:rgba(168,93,0,.18);color:var(--amber)}
-    .tag.warn .dot{background:var(--amber);box-shadow:0 0 0 4px rgba(168,93,0,.14)}
-    .tag.bad{background:rgba(193,18,31,.10);border-color:rgba(193,18,31,.18);color:var(--danger)}
-    .tag.bad .dot{background:var(--danger);box-shadow:0 0 0 4px rgba(193,18,31,.14)}
-    .tag.info{background:rgba(0,166,200,.14);border-color:rgba(0,166,200,.24);color:#004c5c}
-    .tag.info .dot{background:var(--teal2);box-shadow:0 0 0 4px rgba(0,166,200,.16)}
-
-    /* Buttons from Damage should look like the model buttons */
-    .btn{
-      border:none;
-      padding:10px 14px;
-      border-radius:10px;
-      font-weight:900;
-      cursor:pointer;
-      transition:.15s ease;
-      font-size:13px;
-      min-width:150px;
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      justify-content:center;
-    }
-    .btn:hover{transform:translateY(-1px);filter:brightness(.98)}
-    .btn.primary{background:var(--teal2);color:#fff}
-    /* If a button has no variant, treat as ghost */
-    .btn:not(.primary):not(.light):not(.ghost){background:#f6f7f9;border:1px solid rgba(0,0,0,.10);color:#1c4450}
-
-  
-/* =========================================================
-   MOBILE OPTIMIZATIONS (<= 720px)
-   ========================================================= */
-@media (max-width: 720px){
-  body{overflow:auto;}
-  .topbar{
-    position:sticky;
-    top:0;
-    z-index:50;
-    padding:10px 12px;
-  }
-  .wrap{padding:12px !important;}
-  .card{border-radius:16px !important;}
-  .cardHeader{padding:12px 12px 10px !important; gap:10px !important;}
-  .title{font-size:18px !important; line-height:1.1 !important;}
-
-  /* Tabs: horizontal scroll */
-  .tabs{
-    width:100%;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    display:flex !important;
-    gap:8px !important;
-    padding-bottom:2px;
-  }
-  .tabs::-webkit-scrollbar{display:none;}
-  .tab{white-space:nowrap; flex:0 0 auto; padding:9px 12px !important; border-radius:999px !important;}
-
-  .content{padding:12px !important;}
-
-  /* Damage layouts: stack */
-  .grid{grid-template-columns:1fr !important; gap:12px !important;}
-  .row{grid-template-columns:1fr !important; gap:10px !important;}
-
-  /* Cards */
-  .content .card h2{padding:12px 12px 10px !important; font-size:14px !important;}
-  .content .body{padding:12px !important;}
-
-  /* Forms */
-  input, select, textarea{padding:11px 12px !important; border-radius:12px !important; font-size:14px !important;}
-  label{font-size:12px !important;}
-
-  /* Buttons */
-  .actions{gap:10px !important;}
-  .btn{width:100%; min-width:unset !important; padding:12px 14px !important; border-radius:12px !important; font-size:14px !important;}
-
-  /* List items */
-  .list .item{grid-template-columns:1fr !important; gap:8px !important;}
-}
-
-/* Extra small phones */
-@media (max-width: 420px){
-  .brand{min-width:44px}
-  .iconbtn{width:44px;height:44px}
-  .title{font-size:17px !important;}
-}
-
-
-    /* 4-column row for CNTR + Size + Unit Type + Operation/Origin */
-    .row.row4{grid-template-columns: 1.2fr .7fr .9fr 1.2fr;}
-    @media (max-width: 720px){ .row.row4{grid-template-columns:1fr !important;} }
-
-</style>
+    </style>
 </head>
-
 <body>
-  <div class="topbar">
-    <button class="iconbtn" title="Menu" aria-label="Menu" onclick="toast &amp;&amp; toast(&#39;Menu (demo). Use as abas para navegar.&#39;);">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M4 6h16M4 12h16M4 18h12" stroke="white" stroke-width="2.4" stroke-linecap="round"></path>
-      </svg>
-    </button>
-    <div class="brand">CY</div>
-    <div style="display:flex;gap:10px">
-      <button class="iconbtn" title="Dica" aria-label="Dica" onclick="toast &amp;&amp; toast(&#39;Dica: Inspeção → Avarias → Relatórios. Interface no padrão VSC.&#39;);">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M12 18h.01M10 10a2 2 0 1 1 3 1.7c-.7.5-1 1-1 2.3v.5" stroke="white" stroke-width="2.4" stroke-linecap="round"></path>
-          <path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10Z" stroke="white" stroke-width="2.2"></path>
-        </svg>
-      </button>
-    </div>
-  </div>
+<header>
+  <h1>Catálogo de 20 Automações RPA para o HXtos CY - v1.0</h1>
+  <div class="sub">Blueprint operacional: eventos -&gt; filas -&gt; bots -&gt; callback auditável • 15/01/2026</div>
+</header>
 
-  <div class="wrap">
+<div class="wrap">
+  <nav>
+    <div class="cat">Compliance e Documentos</div>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#doc-01"><b>DOC-01</b> - Validação NF-e/CT-e + captura de XML/PDF com evidência</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#doc-02"><b>DOC-02</b> - Classificação automática de anexos e vínculo operacional (CE/BL/CNTR)</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#doc-03"><b>DOC-03</b> - Consulta de status aduaneiro em portais legados e sincronização no CY</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#doc-04"><b>DOC-04</b> - Geração automática de dossiê de contêiner (PDF) e distribuição</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#doc-05"><b>DOC-05</b> - Leitura de e-mails operacionais e abertura automática de pendências no CY</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#doc-06"><b>DOC-06</b> - Checklist de compliance por tipo de carga e bloqueio preventivo de etapas</a>
+<div class="cat">Gate e Atendimento</div>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#gate-01"><b>GATE-01</b> - Pré-checagem automática de gate (agendamento, bloqueios e pendências)</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#gate-02"><b>GATE-02</b> - Automação de cadastro/atualização de motorista e veículo em portais externos</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#gate-03"><b>GATE-03</b> - Emissão automática de etiquetas, recibos e comprovantes (print-to-PDF)</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#gate-04"><b>GATE-04</b> - Triagem de exceções de OCR (placa, lacre, numeração) com RPA assistido</a>
+<div class="cat">Integrações e Resiliência</div>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#int-01"><b>INT-01</b> - Reprocesso idempotente de eventos com fila e Dead-Letter (saga/compensação)</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#int-02"><b>INT-02</b> - Conciliação diária CY x ERP legado (export de telas/relatórios)</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#int-03"><b>INT-03</b> - Robô de monitoramento de indisponibilidade (portais/sistemas) com playbook</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#int-04"><b>INT-04</b> - Coleta automática de comprovantes/protocolos e anexo no evento</a>
+<div class="cat">Yard e Planejamento</div>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#yard-01"><b>YARD-01</b> - Atualização automática de restrições de pilhas (IMDG/reefer/OOG) por boletins externos</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#yard-02"><b>YARD-02</b> - Geração automática de Ordens de Transferência (OT) a partir de lista externa</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#yard-03"><b>YARD-03</b> - Auditoria diária de pátio: inconsistências de posição x evidência (câmeras/relatórios)</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#yard-04"><b>YARD-04</b> - Execução automatizada de 'modo degradado' para equipamentos (planilha -&gt; Work Queue)</a>
+<div class="cat">Backoffice e Analytics</div>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#bo-01"><b>BO-01</b> - Fechamento diário automático: geração de relatórios e distribuição para stakeholders</a>
+<a href="file:///C:/Users/HxTos/Downloads/Catalogo_RPA_HXtos_CY_v1.html#bo-02"><b>BO-02</b> - Robô de cadastro em massa (clientes, contratos, tarifas) em sistemas legados</a>
+  </nav>
+
+  <main>
+    
     <div class="card">
-      <div class="cardHeader">
-        <h1 class="title">Damage</h1>
-
-        <div class="tabs" id="nav" role="tablist" aria-label="Damage Tabs">
-          <a class="tab active" data-page="inspect" role="tab" aria-selected="true"><span class="pill" id="pillInspect">2</span> Inspeção</a>
-          <a class="tab" data-page="avarias" role="tab" aria-selected="false"><span class="pill" id="pillAvarias">2</span> Avarias</a>
-</div>
-
-      </div>
-
-      <div class="content">
-<div class="top">
-        <div>
-          <h1 id="pageTitle">CY | Inspect</h1>
-          <div class="sub" id="pageSub">Registrar inspeção e gerar avaria.</div>
+      <div class="title">Padrão arquitetural recomendado</div>
+      <ul>
+        <li><b>Evento</b> (CY) -&gt; <b>Fila</b> (orquestrador) -&gt; <b>Bot</b> (RPA) -&gt; <b>Callback</b> (API do CY) + evidências.</li>
+        <li><b>Idempotência</b>, <b>DLQ</b> e <b>SLA</b> são requisitos para escalar sem duplicidade e sem risco operacional.</li>
+        <li>Bots não devem escrever direto no banco do CY: sempre retornam para um endpoint controlado.</li>
+      </ul>
+    </div>
+    
+    
+        <section id="doc-01" class="card">
+          <div class="id">DOC-01</div>
+          <div class="title">Validação NF-e/CT-e + captura de XML/PDF com evidência</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Compliance e Documentos</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: DOC.UPLOADED (NF-e/CT-e) ou DOC.VALIDATION.REQUESTED</div>
+          <div class="k">Caso de uso</div><div class="v">Validar automaticamente documentos fiscais recebidos no CY e anexar evidências (XML/PDF + protocolo) no dossiê do contêiner/viagem.</div>
         </div>
         
-      </div>
+          <h3>Descrição</h3>
+          <p>Bot acessa fonte autorizada (integração via portal/ERP/serviço disponível) para confirmar chave, situação e integridade do documento. Em seguida baixa os artefatos (XML/PDF) e registra protocolo de validação no CY.</p>
+          <h3>Atores</h3>
+          <ul><li>Dispatcher/Backoffice</li><li>CY (Captação)</li><li>RPA Worker (não assistido)</li><li>Orquestrador de eventos/filas</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Documento anexado com chave (44 dígitos) e CNPJ emissor/destinatário quando aplicável.</li><li>Credenciais/rota de consulta configuradas no cofre de segredos do RPA.</li><li>Contêiner/BL/CE já cadastrado (ou pendência criada automaticamente).</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Documento validado com status (OK/Pendente/Cancelado/Inexistente).</li><li>XML/PDF anexados ao dossiê.</li><li>Registro de auditoria (jobId, botVersion, timestamps, evidências).</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY dispara evento e cria job na fila DOC_VALIDATION (prioridade conforme operação).</li><li>RPA abre rotina de consulta, autentica e consulta chave.</li><li>RPA baixa XML/PDF quando permitido e captura evidência (hash + timestamp + print).</li><li>RPA envia callback para API do CY com resultado e anexos.</li><li>CY atualiza dossiê e, se houver falha, cria pendência com instrução de tratamento.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Captação &gt; Upload documental inteligente &gt; Painel de Documentos (accordion)</li><li>Captação &gt; Pendências / Vínculos (CE/BL/CNTR)</li><li>Monitor de Integrações &gt; Jobs de Automação (filas, SLA, retentativas)</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Idempotência por (docKey + tipo + emissor) para evitar duplicidade.</li><li>Retentativas com backoff; após N falhas, enviar para Dead-Letter e abrir pendência.</li><li>Se status for Cancelado/Inexistente, bloquear prosseguimento do fluxo de gate/expedição até revisão.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>docType (NFe/CTe)</li><li>docKey</li><li>cnpjEmissor</li><li>cnpjDestinatario (opcional)</li><li>vinculos (CNTR/BL/CE)</li><li>priority</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>validationStatus</li><li>protocolNumber (quando existir)</li><li>evidences[] (urls/hashes)</li><li>xmlFile</li><li>pdfFile</li><li>jobId</li><li>botVersion</li><li>processedAt</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>% documentos validados sem intervenção</li><li>tempo médio de validação (p95)</li><li>% retrabalho por inconsistência documental</li><li>economia estimada de horas (mensal)</li></ul>
+        </section>
+        
 
-      <!-- INSPECT -->
-      <section class="page active" id="page-inspect">
-        <div class="grid">
-          <section class="card">
-            <h2>
-              <span>Registro de Inspeção</span>
-              <span class="tag info"><span class="dot"></span><span class="mono">INSP</span></span>
-            </h2>
-            <div class="body">
-              <div class="row row4">
-                <div>
-                  <label>CNTR</label>
-                  <input id="i_cntr" placeholder="ABCD1234567">
-                </div>
-                <div>
-                  <label>Dimensão</label>
-                  <select id="i_size">
-                    <option value="">—</option>
-                    <option value="20">20’</option>
-                    <option value="40">40’</option>
-                    <option value="40HC">40’HC</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Unidade</label>
-                  <select id="i_unitType">
-                    <option value="">—</option>
-                    <option value="dry">Dry</option>
-                    <option value="reefer">Reefer</option>
-                    <option value="opentop">Open Top</option>
-                    <option value="flatrack">Flat Rack</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Tipo</label>
-                  <select id="i_tipo"><option>GATE IN</option>
-                    <option>GATE OUT</option>
-                    <option>PÁTIO</option>
-                    <option>TRANSFERÊNCIA</option></select>
-                </div>
-              </div>
-
-              <div class="row">
-                <div>
-                  <label>Vínculo (BL/CE/OS)</label>
-                  <input id="i_vinc" placeholder="CE 2026/000123 | BL: ...">
-                </div>
-                <div>
-                  <label>Responsável</label>
-                  <input id="i_resp" placeholder="Inspetor 01">
-                </div>
-              </div>
-
-              <div class="row">
-                <div>
-                  <label>Severidade</label>
-                  <select id="i_sev">
-                    <option>BAIXA</option>
-                    <option>MÉDIA</option>
-                    <option>ALTA</option>
-                    <option>CRÍTICA</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Status</label>
-                  <select id="i_status">
-                    <option>RASCUNHO</option>
-                    <option>EM ANÁLISE</option>
-                    <option>ENCERRADA</option>
-                  </select>
-                </div>
-              </div>
-
-              <label>Descrição / Observações</label>
-              <textarea id="i_desc" placeholder="Resumo: área, tipo de dano, risco e decisão operacional."></textarea>
-
-              <div class="actions">
-                <button class="btn primary" id="i_save">💾 Salvar inspeção</button>
-                <button class="btn" id="i_gen">🛠️ Gerar avaria</button>
-                <button class="btn" id="i_new">➕ Nova</button>
-              </div>
-            </div>
-          </section>
-
-          <section class="card">
-            <h2>
-              <span>Inspeções Recentes</span>
-              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>clique para ver</span>
-            </h2>
-            <div class="body">
-              <div class="row">
-                <div>
-                  <label>Filtro CNTR</label>
-                  <input id="i_fcntr" placeholder="ABCD...">
-                </div>
-                <div>
-                  <label>Filtro Status</label>
-                  <select id="i_fstatus">
-                    <option value="">Todos</option>
-                    <option>RASCUNHO</option>
-                    <option>EM ANÁLISE</option>
-                    <option>ENCERRADA</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="actions" style="margin-top:10px;">
-                <button class="btn" id="i_apply">🔎 Aplicar</button>
-                <button class="btn" id="i_clear">🧹 Limpar</button>
-              </div>
-
-              <div style="margin-top:12px;" class="list" id="i_list">
-        <div class="item" data-id="INSP-20260105-151200">
-          <div>
-            <div><b>ABCD1234567</b> <span class="mono" style="opacity:.70">• INSP-20260105-151200</span></div>
-            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="tag ok"><span class="dot"></span>BAIXA</span> <span class="tag info"><span class="dot"></span>ENCERRADA</span>
-              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>GATE IN</span>
-            </div>
-          </div>
-          <div class="mono" style="opacity:.60">06/01/2026 14:54</div>
+        <section id="doc-02" class="card">
+          <div class="id">DOC-02</div>
+          <div class="title">Classificação automática de anexos e vínculo operacional (CE/BL/CNTR)</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Compliance e Documentos</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: DOC.UPLOADED (qualquer anexo) ou DOC.LINKING.REQUESTED</div>
+          <div class="k">Caso de uso</div><div class="v">Classificar anexos (tipo de documento) e sugerir/efetivar vínculo com entidades operacionais do CY.</div>
         </div>
-        <div class="item" data-id="INSP-20260105-141020">
-          <div>
-            <div><b>TGHU0099887</b> <span class="mono" style="opacity:.70">• INSP-20260105-141020</span></div>
-            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="tag bad"><span class="dot"></span>ALTA</span> <span class="tag info"><span class="dot"></span>EM ANÁLISE</span>
-              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>TRANSFERÊNCIA</span>
-            </div>
-          </div>
-          <div class="mono" style="opacity:.60">06/01/2026 13:31</div>
-        </div></div>
-            </div>
-          </section>
+        
+          <h3>Descrição</h3>
+          <p>Combina heurísticas determinísticas (nome/regex/metadados) com um classificador de IA (opcional) para sugerir tipo e vínculo. O RPA executa a parte de navegação/extração em sistemas sem API; o CY mantém a decisão final e auditoria.</p>
+          <h3>Atores</h3>
+          <ul><li>Dispatcher</li><li>CY (Captação)</li><li>RPA Worker</li><li>Copilot/IA (opcional)</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Arquivo anexado (PDF/JPG/PNG/XML).</li><li>Regras de classificação configuradas por cliente/recinto.</li><li>Estratégia de fallback definida (humano revisa quando confiança baixa).</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Documento classificado (ex.: BL, CE, Packing List, Invoice, Laudo, Foto).</li><li>Vínculo criado/sugerido com CNTR/BL/CE.</li><li>Pendência aberta quando ambíguo.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY cria job CLASSIFY_AND_LINK.</li><li>RPA extrai metadados e texto acessível (quando possível) e aplica regras.</li><li>Se habilitado, serviço de IA sugere classificação e entidades relacionadas (com score).</li><li>CY aplica automaticamente quando score &gt;= limiar; caso contrário, envia para revisão.</li><li>Resultado é registrado no dossiê com justificativa.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Captação &gt; Upload documental inteligente (classificação e score)</li><li>Captação &gt; Vínculo operacional (CE/BL/CNTR)</li><li>Painel do Dispatcher &gt; Pendências de Documentos</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Somente auto-vincular quando score e regras de consistência forem atendidos.</li><li>Nunca sobrescrever vínculo manual sem confirmação.</li><li>Manter trilha: regra/feature que motivou a classificação.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>fileId</li><li>filename</li><li>mimeType</li><li>uploader</li><li>context (Gate/Yard/Export/Import)</li><li>vinculosExistentes[]</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>docClass</li><li>confidenceScore</li><li>suggestedLinks[]</li><li>appliedLinks[]</li><li>reviewRequired (bool)</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>% anexos auto-classificados</li><li>% auto-vínculos corretos (amostragem)</li><li>redução de tempo de dossiê completo por contêiner</li></ul>
+        </section>
+        
+
+        <section id="doc-03" class="card">
+          <div class="id">DOC-03</div>
+          <div class="title">Consulta de status aduaneiro em portais legados e sincronização no CY</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Compliance e Documentos</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: COMPLIANCE.STATUS_REFRESH (por lote/agenda) ou exceção operacional</div>
+          <div class="k">Caso de uso</div><div class="v">Atualizar status de processos/consultas quando a fonte principal é portal/tela sem API ou com instabilidade.</div>
         </div>
-      </section>
+        
+          <h3>Descrição</h3>
+          <p>Bot realiza consultas em portais legados (ou telas internas) para capturar status e protocolos, retornando ao CY para atualizar o dossiê e liberar etapas operacionais.</p>
+          <h3>Atores</h3>
+          <ul><li>Backoffice</li><li>CY (Compliance)</li><li>RPA Worker</li><li>Orquestrador</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Lista de itens a consultar (por BL/CNTR/CE/DUE).</li><li>Credenciais disponíveis e políticas de acesso aprovadas.</li><li>Janelas de execução definidas (para não impactar operação).</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Status sincronizado no CY com timestamp e evidência.</li><li>Alertas gerados para bloqueios/pendências.</li><li>Fila de reprocesso para itens com erro temporário.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY gera lote (batch) de consultas e publica jobs.</li><li>RPA autentica, consulta item, captura status + protocolo + evidência.</li><li>RPA retorna resultados (success/partial/error) por item.</li><li>CY atualiza status e dispara eventos dependentes (Gate/Yard/Expedição).</li><li>Itens com erro vão para retentativa e, se exceder SLA, viram alerta.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Compliance &gt; Painel de Status (timeline + última atualização)</li><li>Monitor de Integrações &gt; Execuções RPA (batch)</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Separar consultas por cliente/recinto para evitar bloqueio de sessão.</li><li>Respeitar limites de requisições e horários acordados.</li><li>Evidência obrigatória para mudanças de status.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>entityType (BL/CNTR/CE/DUE)</li><li>entityId</li><li>requestedBy</li><li>batchId</li><li>priority</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>currentStatus</li><li>statusCode</li><li>protocol</li><li>evidence</li><li>lastCheckedAt</li><li>jobId</li><li>batchId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>% itens atualizados dentro do SLA</li><li>taxa de erro por portal</li><li>redução de ligações/consultas manuais</li></ul>
+        </section>
+        
 
-      <!-- AVARIAS -->
-      <section class="page" id="page-avarias">
-        <div class="grid">
-          <section class="card">
-            <h2>
-              <span>Registro de Avaria</span>
-              <span class="tag warn"><span class="dot"></span><span class="mono">AVA</span></span>
-            </h2>
-            <div class="body">
-              <div class="row row4">
-                <div>
-                  <label>CNTR</label>
-                  <input id="a_cntr" placeholder="ABCD1234567">
-                </div>
-                <div>
-                  <label>Dimensão</label>
-                  <select id="a_size">
-                    <option value="">—</option>
-                    <option value="20">20’</option>
-                    <option value="40">40’</option>
-                    <option value="40HC">40’HC</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Unidade</label>
-                  <select id="a_unitType">
-                    <option value="">—</option>
-                    <option value="dry">Dry</option>
-                    <option value="reefer">Reefer</option>
-                    <option value="opentop">Open Top</option>
-                    <option value="flatrack">Flat Rack</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Origem</label>
-                  <select id="a_origem"><option>VISTORIA</option>
-                    <option>GATE</option>
-                    <option>PÁTIO</option>
-                    <option>EQUIPAMENTO</option>
-                    <option>TERCEIRO</option></select>
-                </div>
-              </div>
-
-              <div class="row">
-                <div>
-                  <label>Severidade</label>
-                  <select id="a_sev">
-                    <option>BAIXA</option>
-                    <option>MÉDIA</option>
-                    <option>ALTA</option>
-                    <option>CRÍTICA</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Status</label>
-                  <select id="a_status">
-                    <option>ABERTA</option>
-                    <option>EM ANÁLISE</option>
-                    <option>EM REPARO</option>
-                    <option>ENCERRADA</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="row">
-                <div>
-                  <label>Área</label>
-                  <select id="a_area">
-                    <option>PORTAS</option>
-                    <option>LATERAL ESQ</option>
-                    <option>LATERAL DIR</option>
-                    <option>FRENTE</option>
-                    <option>TETO</option>
-                    <option>PISO</option>
-                    <option>CANTONEIRAS</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Tipo</label>
-                  <select id="a_tipo">
-                    <option>AMASSADO</option>
-                    <option>CORTE / PERFURAÇÃO</option>
-                    <option>FERRUGEM</option>
-                    <option>TRINCA</option>
-                    <option>DESALINHAMENTO</option>
-                    <option>OUTRA</option>
-                  </select>
-                </div>
-              </div>
-
-              <label>Descrição / Decisão</label>
-              <textarea id="a_desc" placeholder="Descreva a avaria e decisão: hold, repair, liberação etc."></textarea>
-
-              <label>Fotos / Evidências</label>
-              <div class="uploadBox">
-                <div>
-                  <div style="font-weight:900;">📷 Anexar fotos</div>
-                  <small>Demo: salva apenas o nome do arquivo.</small>
-                </div>
-                <input id="a_files" type="file" multiple="" accept="image/*">
-              </div>
-              <div class="chips" id="a_chips"><span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>sem fotos</span></div>
-
-              <div class="actions">
-                <button class="btn primary" id="a_save">💾 Salvar avaria</button>
-                <button class="btn" id="a_new">➕ Nova</button>
-              </div>
-            </div>
-          </section>
-
-          <section class="card">
-            <h2>
-              <span>Avarias Recentes</span>
-              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>clique para ver</span>
-            </h2>
-            <div class="body">
-              <div class="row">
-                <div>
-                  <label>Filtro CNTR</label>
-                  <input id="a_fcntr" placeholder="ABCD...">
-                </div>
-                <div>
-                  <label>Filtro Status</label>
-                  <select id="a_fstatus">
-                    <option value="">Todos</option>
-                    <option>ABERTA</option>
-                    <option>EM ANÁLISE</option>
-                    <option>EM REPARO</option>
-                    <option>ENCERRADA</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="row">
-                <div>
-                  <label>Filtro Severidade</label>
-                  <select id="a_fsev">
-                    <option value="">Todas</option>
-                    <option>BAIXA</option>
-                    <option>MÉDIA</option>
-                    <option>ALTA</option>
-                    <option>CRÍTICA</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Filtro Origem</label>
-                  <select id="a_forigem">
-                    <option value="">Todas</option>
-                    <option>VISTORIA</option>
-                    <option>GATE</option>
-                    <option>PÁTIO</option>
-                    <option>EQUIPAMENTO</option>
-                    <option>TERCEIRO</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="actions" style="margin-top:10px;">
-                <button class="btn" id="a_apply">🔎 Aplicar</button>
-                <button class="btn" id="a_clear">🧹 Limpar</button>
-              </div>
-
-              <div style="margin-top:12px;" class="list" id="a_list">
-        <div class="item" data-id="AVA-20260106-224619">
-          <div>
-            <div><b>MSKU7897896</b> <span class="mono" style="opacity:.70">• AVA-20260106-224619</span></div>
-            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="tag warn"><span class="dot"></span>MÉDIA</span> <span class="tag info"><span class="dot"></span>EM ANÁLISE</span>
-              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>PISO</span>
-              <span class="tag"><span class="dot" style="background:rgba(37,99,235,.85)"></span>TERCEIRO</span>
-              <span class="tag"><span class="dot" style="background:rgba(16,185,129,.85)"></span>📷 0 foto(s)</span>
-            </div>
-          </div>
-          <div class="mono" style="opacity:.60">06/01/2026 22:46</div>
+        <section id="doc-04" class="card">
+          <div class="id">DOC-04</div>
+          <div class="title">Geração automática de dossiê de contêiner (PDF) e distribuição</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Compliance e Documentos</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: DOSSIER.GENERATE (antes de gate-out/entrega)</div>
+          <div class="k">Caso de uso</div><div class="v">Consolidar evidências e documentos do contêiner em um único dossiê PDF, padronizado por cliente.</div>
         </div>
-        <div class="item" data-id="AVA-20260105-155500">
-          <div>
-            <div><b>TGHU0099887</b> <span class="mono" style="opacity:.70">• AVA-20260105-155500</span></div>
-            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="tag bad"><span class="dot"></span>ALTA</span> <span class="tag info"><span class="dot"></span>EM ANÁLISE</span>
-              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>PORTAS</span>
-              <span class="tag"><span class="dot" style="background:rgba(37,99,235,.85)"></span>VISTORIA</span>
-              <span class="tag"><span class="dot" style="background:rgba(16,185,129,.85)"></span>📷 2 foto(s)</span>
-            </div>
-          </div>
-          <div class="mono" style="opacity:.60">06/01/2026 15:18</div>
-        </div></div>
-            </div>
-          </section>
+        
+          <h3>Descrição</h3>
+          <p>CY compila artefatos; quando algum documento estiver em fonte externa sem API, o RPA busca e adiciona ao pacote. Ao final, distribui por email/portal interno ou repositório.</p>
+          <h3>Atores</h3>
+          <ul><li>Backoffice</li><li>CY</li><li>RPA Worker</li><li>Sistema de arquivos/ECM</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Entidade CNTR com vínculos e checklist mínimo definido.</li><li>Template de dossiê configurado (cliente/recinto).</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>PDF gerado com índice e carimbo de auditoria.</li><li>Distribuição registrada (quem recebeu, quando, onde).</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY verifica checklist; itens faltantes geram jobs de coleta RPA.</li><li>RPA coleta documentos faltantes e devolve ao CY.</li><li>CY monta dossiê e gera PDF com índice.</li><li>CY dispara distribuição (email/ECM) e registra protocolo.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Captação &gt; Dossiê do Contêiner &gt; Gerar/Visualizar</li><li>Admin &gt; Templates de Dossiê</li><li>Monitor de Integrações &gt; Distribuições</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Checklist mínimo por tipo de operação (import/export/empty).</li><li>Dossiê versionado; nunca sobrescrever sem criar nova versão.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>cntrId</li><li>triggerStage (GateOut/Entrega)</li><li>templateId</li><li>recipients[]</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>dossierPdfUrl</li><li>dossierVersion</li><li>distributionLog[]</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>tempo para dossiê completo</li><li>% dossiês gerados sem intervenção</li><li>redução de não-conformidade documental</li></ul>
+        </section>
+        
+
+        <section id="doc-05" class="card">
+          <div class="id">DOC-05</div>
+          <div class="title">Leitura de e-mails operacionais e abertura automática de pendências no CY</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Compliance e Documentos</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: MAILBOX.POLL (agenda) ou webhook do provedor</div>
+          <div class="k">Caso de uso</div><div class="v">Capturar e-mails com anexos (BL, fotos, autorizações) e criar itens no Upload documental inteligente com classificação e roteamento.</div>
         </div>
-      </section>
+        
+          <h3>Descrição</h3>
+          <p>Bot monitora caixas de e-mail dedicadas (por cliente/recinto), extrai anexos, aplica regras e cria pendências no CY quando faltar contexto (CNTR/BL/CE).</p>
+          <h3>Atores</h3>
+          <ul><li>Backoffice</li><li>CY</li><li>RPA Worker</li><li>Caixa de e-mail corporativa</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Caixas de e-mail segregadas por operação e políticas LGPD/segurança definidas.</li><li>Regras de roteamento e parsing configuradas.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Anexos importados para o CY e classificados.</li><li>Pendências abertas para revisão quando necessário.</li><li>Registro de origem (messageId) para rastreabilidade.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>RPA lê novos e-mails, baixa anexos e identifica contexto.</li><li>RPA cria registro de documento no CY e anexa arquivos.</li><li>CY executa DOC-02 (classificar/vincular).</li><li>Quando houver ambiguidade, CY abre pendência para o Dispatcher.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Captação &gt; Upload documental inteligente</li><li>Painel do Dispatcher &gt; Pendências</li><li>Admin &gt; Regras de Roteamento de E-mail</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Não importar anexos duplicados (hash).</li><li>Quarentena para anexos suspeitos/indesejados.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>mailboxId</li><li>messageId</li><li>subject</li><li>sender</li><li>attachments[]</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>createdDocIds[]</li><li>routingResult</li><li>pendingTasks[]</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>% anexos processados automaticamente</li><li>tempo médio do e-mail até aparecer no CY</li><li>taxa de duplicidade evitada</li></ul>
+        </section>
+        
+
+        <section id="doc-06" class="card">
+          <div class="id">DOC-06</div>
+          <div class="title">Checklist de compliance por tipo de carga e bloqueio preventivo de etapas</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Compliance e Documentos</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: OPERATION.STAGE_CHANGE (GateIn, Yard, GateOut)</div>
+          <div class="k">Caso de uso</div><div class="v">Aplicar checklist dinâmico e bloquear avanço quando faltar documento/regra obrigatória.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>Ao detectar mudança de estágio, o CY valida checklist. Se item depender de fonte externa sem API, o RPA tenta coletar/confirmar antes de bloquear; caso não consiga, abre exceção controlada.</p>
+          <h3>Atores</h3>
+          <ul><li>Dispatcher</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Matriz de checklist configurada por IMDG/reefer/OOG/cliente.</li><li>Regras de exceção e aprovações definidas.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Etapa liberada com evidência ou bloqueada com justificativa.</li><li>Exceções registradas e auditáveis.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY avalia checklist ao mudar estágio.</li><li>Para itens 'verificáveis', cria jobs de verificação RPA.</li><li>RPA retorna evidências; CY decide liberar/bloquear.</li><li>Quando bloqueado, cria pendência com passo a passo para resolver.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Compliance &gt; Checklists &amp; Regras</li><li>Gate/Yard/Expedição &gt; Banner de Bloqueio/Liberação</li><li>Pendências &gt; Aprovação de Exceção</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Exceção exige trilha (quem, por quê, validade).</li><li>Bloqueio preventivo prioriza segurança e conformidade.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>stage</li><li>cntrId</li><li>cargoProfile</li><li>customerId</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>checklistStatus</li><li>blockingReasons[]</li><li>exceptions[]</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>redução de liberações indevidas</li><li>% bloqueios resolvidos em 1h</li><li>incidentes evitados (proxy)</li></ul>
+        </section>
+        
+
+        <section id="gate-01" class="card">
+          <div class="id">GATE-01</div>
+          <div class="title">Pré-checagem automática de gate (agendamento, bloqueios e pendências)</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Gate e Atendimento</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: GATE.PRECHECK.REQUESTED (T-2h do slot) ou ao criar agendamento</div>
+          <div class="k">Caso de uso</div><div class="v">Executar pré-checagem e avisar transportadora antes do caminhão chegar.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA consulta sistemas/portais sem API (cliente, transportadora, ERP legado) para confirmar permissões e pendências; o CY envia notificação com status e instruções.</p>
+          <h3>Atores</h3>
+          <ul><li>Gate clerk/Dispatcher</li><li>CY (Gate)</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Agendamento criado com placa/motorista e vínculo a CNTR/BL.</li><li>Canais de notificação configurados (email/WhatsApp corporativo/portal).</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Status de pré-checagem (OK/pendente/bloqueado).</li><li>Notificação enviada com ação recomendada.</li><li>Registro de auditoria e evidência.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY cria job PRECHECK e define SLA (ex.: 5 min).</li><li>RPA executa consultas necessárias (por cliente) e coleta evidências.</li><li>RPA retorna resultado; CY aplica regras e atualiza agendamento.</li><li>CY envia notificação com QR/Checklist (quando aplicável).</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Gate &gt; Agendamentos &gt; Pré-checagem (status em tempo real)</li><li>Gate &gt; Ocorrências / Bloqueios</li><li>Monitor de Integrações &gt; PRECHECK Jobs</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Se pendência crítica, bloquear check-in e sugerir re-agendamento.</li><li>Pré-checagem reprocessa automaticamente se dados mudarem.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>appointmentId</li><li>truckPlate</li><li>driverId</li><li>cntrId</li><li>customerId</li><li>scheduledAt</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>precheckStatus</li><li>issues[]</li><li>recommendedActions[]</li><li>notifiedAt</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>redução de fila de gate</li><li>% pré-checagens concluídas antes do slot</li><li>taxa de no-show reduzida</li></ul>
+        </section>
+        
+
+        <section id="gate-02" class="card">
+          <div class="id">GATE-02</div>
+          <div class="title">Automação de cadastro/atualização de motorista e veículo em portais externos</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Gate e Atendimento</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: PARTY.REGISTRATION.NEEDED ou no onboarding de transportadora</div>
+          <div class="k">Caso de uso</div><div class="v">Cadastrar/atualizar dados quando o portal externo não oferece integração adequada.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>Bot executa o cadastro em portal legado, retorna o protocolo e atualiza o cadastro mestre no CY.</p>
+          <h3>Atores</h3>
+          <ul><li>Backoffice/Gate</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Dados mínimos validados no CY (documentos, CNH, validade).</li><li>Política de acesso e consentimento estabelecida.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Cadastro sincronizado com protocolo.</li><li>Alertas para pendências (ex.: documento vencido).</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY identifica necessidade (novo cadastro/atualização) e cria job.</li><li>RPA acessa portal externo, preenche formulários, anexa documentos.</li><li>RPA captura protocolo/print e retorna ao CY.</li><li>CY atualiza cadastro e libera agendamentos relacionados.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Cadastros &gt; Transportadoras / Motoristas / Veículos</li><li>Gate &gt; Agendamentos (validação de cadastro)</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Não enviar dados sensíveis fora do escopo definido.</li><li>Revalidar automaticamente validade de documentos periodicamente.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>partyType</li><li>partyData</li><li>documents[]</li><li>customerId</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>externalRegistrationStatus</li><li>protocol</li><li>evidence</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>tempo de onboarding de transportadora</li><li>% cadastros automatizados</li><li>redução de recusas no gate por cadastro incompleto</li></ul>
+        </section>
+        
+
+        <section id="gate-03" class="card">
+          <div class="id">GATE-03</div>
+          <div class="title">Emissão automática de etiquetas, recibos e comprovantes (print-to-PDF)</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Gate e Atendimento</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: GATE.CHECKIN.COMPLETED ou GATE.CHECKOUT.COMPLETED</div>
+          <div class="k">Caso de uso</div><div class="v">Gerar comprovantes padronizados e anexar ao histórico do atendimento.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>Quando a impressora/sistema de etiqueta é legado, o RPA automatiza a emissão e salva PDF no dossiê, reduzindo erro humano e garantindo evidência.</p>
+          <h3>Atores</h3>
+          <ul><li>Gate clerk</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Layout de etiqueta/recibo padronizado por cliente.</li><li>Drivers/ambiente de impressão configurados no worker.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>PDF/arquivo gerado e anexado ao atendimento.</li><li>Número de recibo registrado.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY finaliza check-in/out e solicita emissão.</li><li>RPA abre aplicativo legado, preenche dados e emite etiqueta/recibo.</li><li>RPA salva como PDF e envia ao CY.</li><li>CY associa ao atendimento e ao CNTR/appointment.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Gate &gt; Atendimento &gt; Comprovantes</li><li>Gate &gt; Histórico do Caminhão</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Se falhar a emissão, permitir reprocesso por um clique no CY.</li><li>Gerar numeração única por recinto e data.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>serviceType</li><li>appointmentId</li><li>cntrId</li><li>truckData</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>receiptNumber</li><li>pdfUrl</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>% emissões automáticas sem erro</li><li>tempo médio por atendimento</li><li>redução de divergência de recibos</li></ul>
+        </section>
+        
+
+        <section id="gate-04" class="card">
+          <div class="id">GATE-04</div>
+          <div class="title">Triagem de exceções de OCR (placa, lacre, numeração) com RPA assistido</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Gate e Atendimento</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: OCR.CONFIDENCE.LOW (câmera/gate kiosk)</div>
+          <div class="k">Caso de uso</div><div class="v">Resolver rapidamente leituras com baixa confiança sem travar a fila.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>Quando OCR falha, o CY abre uma tarefa assistida para o operador; o RPA preenche automaticamente campos e abre telas certas, reduzindo cliques e tempo.</p>
+          <h3>Atores</h3>
+          <ul><li>Gate clerk</li><li>CY</li><li>RPA Assistido</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Kiosk/câmera integrado e regra de confiança definida.</li><li>Perfil de operador com permissão para corrigir.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Campos corrigidos e auditorados.</li><li>Fila de gate mantém fluidez.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY identifica baixa confiança e abre tarefa de correção.</li><li>RPA assistido abre tela do atendimento, carrega imagens e pré-preenche sugestões.</li><li>Operador valida/ajusta e confirma.</li><li>CY registra correção e retroalimenta métricas.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Gate &gt; Exceções OCR &gt; Console de Correção</li><li>Gate &gt; Atendimento</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Sempre salvar evidência da imagem usada na correção.</li><li>Correções repetidas por transportadora viram alerta de qualidade.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>appointmentId</li><li>ocrField</li><li>confidence</li><li>imageUrl</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>correctedValue</li><li>operatorId</li><li>evidence</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>tempo médio de correção</li><li>% exceções por turno</li><li>impacto na fila (veículos/hora)</li></ul>
+        </section>
+        
+
+        <section id="int-01" class="card">
+          <div class="id">INT-01</div>
+          <div class="title">Reprocesso idempotente de eventos com fila e Dead-Letter (saga/compensação)</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Integrações e Resiliência</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: INTEGRATION.FAILURE (erro/transiente) ou comando manual 'Reprocessar'</div>
+          <div class="k">Caso de uso</div><div class="v">Garantir entrega de eventos e consistência mesmo com falhas intermitentes.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>Orquestrador cria jobs de reprocesso; quando não há API para consulta de retorno, o RPA busca evidências (protocolo/aceite) e devolve ao CY. Suporta ações compensatórias.</p>
+          <h3>Atores</h3>
+          <ul><li>NOC/Dispatcher</li><li>CY</li><li>Orquestrador</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Chaves de idempotência definidas por tipo de evento.</li><li>Política de retentativa e SLA por integração.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Evento entregue/confirmado ou isolado em DLQ com diagnóstico.</li><li>Ação compensatória aplicada quando necessário.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>Falha gera job de retry com backoff.</li><li>RPA confirma se o destino recebeu (quando aplicável).</li><li>Se recebido, CY fecha incidente; se não, reenfileira ou aplica compensação.</li><li>Após limite, enviar para DLQ e abrir ticket.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Monitor de Integrações &gt; Filas/SLA/DLQ</li><li>Monitor de Integrações &gt; Detalhe do Evento</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Nunca duplicar evento no destino (idempotência obrigatória).</li><li>DLQ exige análise e ação humana antes de reprocesso forçado.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>eventType</li><li>eventId</li><li>idempotencyKey</li><li>payloadRef</li><li>destination</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>deliveryStatus</li><li>attempts</li><li>lastError</li><li>evidence</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>taxa de entrega dentro do SLA</li><li>tamanho de DLQ</li><li>tempo médio de resolução de incidentes</li></ul>
+        </section>
+        
+
+        <section id="int-02" class="card">
+          <div class="id">INT-02</div>
+          <div class="title">Conciliação diária CY x ERP legado (export de telas/relatórios)</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Integrações e Resiliência</div>
+          <div class="k">Acionador</div><div class="v">Agenda diária (ex.: 02:00) ou on-demand</div>
+          <div class="k">Caso de uso</div><div class="v">Comparar movimentos/serviços entre CY e ERP sem integração nativa.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA extrai relatórios do ERP (tela/relatório), normaliza e devolve ao CY para conciliar divergências, gerando lista de ações corretivas.</p>
+          <h3>Atores</h3>
+          <ul><li>Backoffice</li><li>CY</li><li>RPA Worker</li><li>ERP legado</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Mapeamento de campos e regras de equivalência configuradas.</li><li>Janelas de execução fora do pico.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Relatório de conciliação e divergências priorizadas.</li><li>Sugestões de correção (quem deve agir).</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>RPA gera e baixa relatório no ERP.</li><li>CY importa e concilia com movimentos do dia (gate/yard).</li><li>CY gera dashboard de divergências e tarefas.</li><li>Operador corrige e marca como resolvido.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Backoffice &gt; Conciliação &gt; Dashboard</li><li>Monitor de Integrações &gt; Execuções de Conciliação</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Regras de matching por CNTR+data+tipo de serviço.</li><li>Divergências críticas bloqueiam faturamento até resolução.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>dateRange</li><li>erpProfile</li><li>matchingRulesetId</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>divergences[]</li><li>summary</li><li>reportFiles[]</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>% divergências por dia</li><li>tempo até resolver divergência</li><li>impacto em faturamento (R$ evitado)</li></ul>
+        </section>
+        
+
+        <section id="int-03" class="card">
+          <div class="id">INT-03</div>
+          <div class="title">Robô de monitoramento de indisponibilidade (portais/sistemas) com playbook</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Integrações e Resiliência</div>
+          <div class="k">Acionador</div><div class="v">Agenda (a cada 5-10 min) + detecção de erro</div>
+          <div class="k">Caso de uso</div><div class="v">Detectar indisponibilidade de portais/sistemas críticos e acionar modo degradado no CY.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA realiza 'health checks' reais (login + ação mínima) e publica status. O CY aciona playbooks (modo manual, filas, mensagens).</p>
+          <h3>Atores</h3>
+          <ul><li>NOC/Dispatcher</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Lista de serviços críticos e ações mínimas por serviço.</li><li>Canais de alerta configurados.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Status do serviço (UP/DOWN/DEGRADED) no CY.</li><li>Alertas e modo degradado acionado.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>RPA executa check e mede tempo de resposta.</li><li>Se DOWN/DEGRADED, CY ativa banner e altera regras (ex.: permitir operação com evidência mínima).</li><li>Quando normaliza, CY encerra modo degradado e dispara reprocessos.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>NOC &gt; Status de Serviços</li><li>Monitor de Integrações &gt; Incidentes</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Evitar falso positivo (2 de 3 checks).</li><li>Modo degradado exige registro de exceções.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>serviceId</li><li>checkScriptId</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>healthStatus</li><li>latencyMs</li><li>evidence</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>MTTR (tempo de recuperação)</li><li>tempo de detecção</li><li>impacto evitado em filas</li></ul>
+        </section>
+        
+
+        <section id="int-04" class="card">
+          <div class="id">INT-04</div>
+          <div class="title">Coleta automática de comprovantes/protocolos e anexo no evento</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Integrações e Resiliência</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: EVENT.SENT (quando destino não retorna recibo via API)</div>
+          <div class="k">Caso de uso</div><div class="v">Garantir evidência de aceite para auditoria e rastreabilidade.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA acessa o destino (portal/tela) para localizar o evento enviado e capturar recibo/protocolo, anexando ao evento no CY.</p>
+          <h3>Atores</h3>
+          <ul><li>NOC/Backoffice</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Evento registrado no CY com correlatorId.</li><li>Destino possui consulta visual/pesquisa.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Recibo/protocolo anexado e evento marcado como confirmado.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY marca evento como 'pendente de comprovação'.</li><li>RPA consulta destino usando correlatorId e captura recibo.</li><li>RPA retorna ao CY; CY atualiza status e arquiva evidência.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Monitor de Integrações &gt; Eventos &gt; Evidências</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Prazo máximo para comprovação (ex.: 30 min).</li><li>Se não localizar, abrir incidente automaticamente.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>eventId</li><li>correlatorId</li><li>destination</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>receipt</li><li>evidence</li><li>confirmedAt</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>% eventos confirmados</li><li>tempo até confirmação</li><li>incidentes por ausência de comprovante</li></ul>
+        </section>
+        
+
+        <section id="yard-01" class="card">
+          <div class="id">YARD-01</div>
+          <div class="title">Atualização automática de restrições de pilhas (IMDG/reefer/OOG) por boletins externos</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Yard e Planejamento</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: YARD.RULES.UPDATE (agenda) ou novo boletim</div>
+          <div class="k">Caso de uso</div><div class="v">Aplicar regras de segurança e capacidade com base em boletins/planilhas externas sem API.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA baixa boletins (PDF/planilha) de fonte definida, extrai parâmetros e atualiza regras no CY mediante aprovação.</p>
+          <h3>Atores</h3>
+          <ul><li>Yard Planner</li><li>CY (Admin/Planejamento)</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Fonte oficial/boletim definido e acessível.</li><li>Modelo de extração e validação aprovado.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Regras atualizadas e versionadas.</li><li>Alerta sobre mudanças relevantes (impacto em slots).</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>RPA baixa boletim e extrai parâmetros-chave.</li><li>CY gera proposta de mudança (diff) para aprovação do Planner.</li><li>Após aprovação, CY publica nova versão de regras e recalcula alertas.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Planejamento &gt; Regras de Pátio (Stack Limits, Clearances, IMDG)</li><li>Planejamento &gt; Simulador de Impacto (antes de publicar)</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Mudanças críticas exigem aprovação dupla.</li><li>Versionamento obrigatório e rollback rápido.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>sourceId</li><li>bulletinRef</li><li>effectiveDate</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>rulesetVersion</li><li>diffSummary</li><li>approvalTaskId</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>tempo para atualizar regras</li><li>incidentes por regra desatualizada (proxy)</li><li>% mudanças aprovadas sem retrabalho</li></ul>
+        </section>
+        
+
+        <section id="yard-02" class="card">
+          <div class="id">YARD-02</div>
+          <div class="title">Geração automática de Ordens de Transferência (OT) a partir de lista externa</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Yard e Planejamento</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: OT.IMPORT.REQUESTED (upload de planilha) ou integração falha</div>
+          <div class="k">Caso de uso</div><div class="v">Criar OTs no CY quando a origem é planilha/arquivo ou sistema legado.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA normaliza arquivo e lança no CY com validações (posição origem/destino, restrições, janela).</p>
+          <h3>Atores</h3>
+          <ul><li>Dispatcher</li><li>Yard Planner</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Arquivo padrão de importação definido.</li><li>Mapa de pátio sincronizado no CY.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>OTs criadas e enfileiradas para execução.</li><li>Erros retornados com linha/coluna para correção.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>Usuário anexa arquivo e solicita importação.</li><li>RPA valida formato, normaliza e cria OTs via API do CY.</li><li>CY aplica regras e publica Work Instructions para execução.</li><li>Erros geram relatório e pendência.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Yard &gt; Ordem de Transferência &gt; Importar</li><li>Equipment Control &gt; Work Queue (instruções geradas)</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Não criar OT para posições bloqueadas.</li><li>Agrupar OTs por bloco para otimizar deslocamentos.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>fileId</li><li>mappingTemplateId</li><li>requestedBy</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>createdOtIds[]</li><li>errors[]</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>OTs criadas por minuto</li><li>% OTs com erro</li><li>redução de digitação manual</li></ul>
+        </section>
+        
+
+        <section id="yard-03" class="card">
+          <div class="id">YARD-03</div>
+          <div class="title">Auditoria diária de pátio: inconsistências de posição x evidência (câmeras/relatórios)</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Yard e Planejamento</div>
+          <div class="k">Acionador</div><div class="v">Agenda diária + evento CY: YARD.AUDIT.RUN</div>
+          <div class="k">Caso de uso</div><div class="v">Detectar divergências entre registro de posição e evidência externa quando não há integração direta.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA coleta relatórios/capturas de sistemas externos (ex.: planilhas de ronda, relatórios de equipamento) e o CY compara com inventário, gerando lista de investigação.</p>
+          <h3>Atores</h3>
+          <ul><li>Yard Supervisor</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Fonte externa padronizada.</li><li>Janela de execução definida.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Lista de divergências com prioridade e evidências.</li><li>Tarefas para inventário/correção.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>RPA baixa relatórios/capturas e envia ao CY.</li><li>CY executa conciliação de inventário e marca divergências.</li><li>CY gera tarefas e sugere áreas de maior risco.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Yard &gt; Inventário &gt; Auditoria</li><li>Dashboard &gt; Qualidade de Dados do Pátio</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Divergência crítica bloqueia alocações automáticas no slot até validação.</li><li>Registrar quem encerrou cada divergência.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>auditDate</li><li>sources[]</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>discrepancies[]</li><li>tasks[]</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>acurácia de inventário (%)</li><li>divergências por 1.000 movimentos</li><li>tempo de encerramento de divergência</li></ul>
+        </section>
+        
+
+        <section id="yard-04" class="card">
+          <div class="id">YARD-04</div>
+          <div class="title">Execução automatizada de 'modo degradado' para equipamentos (planilha -&gt; Work Queue)</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Yard e Planejamento</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: EQUIPMENT.OUTAGE (ou falta de integração com EDI/Machine)</div>
+          <div class="k">Caso de uso</div><div class="v">Manter operação fluindo quando o canal de instrução do equipamento falha.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA converte instruções em formato aceito (ou lança em console legado) e registra confirmações no CY até o restabelecimento.</p>
+          <h3>Atores</h3>
+          <ul><li>Dispatcher</li><li>Equipment Operator</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Procedimento de contingência aprovado.</li><li>Formato de importação/lançamento definido.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Work Instructions executáveis disponíveis.</li><li>Registro consistente de confirmações/tempos.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>CY detecta indisponibilidade e ativa modo degradado.</li><li>RPA publica instruções em canal alternativo e coleta confirmações.</li><li>CY sincroniza de volta quando normaliza.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Equipment Control &gt; Work Queue (modo degradado)</li><li>NOC &gt; Incidentes de Equipamento</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Limitar automações para evitar risco operacional.</li><li>Registrar cada confirmação com evidência mínima.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>equipmentId</li><li>instructions[]</li><li>fallbackChannel</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>acknowledgements[]</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>tempo sem parada operacional</li><li>% instruções confirmadas no SLA</li><li>incidentes durante contingência</li></ul>
+        </section>
+        
+
+        <section id="bo-01" class="card">
+          <div class="id">BO-01</div>
+          <div class="title">Fechamento diário automático: geração de relatórios e distribuição para stakeholders</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Backoffice e Analytics</div>
+          <div class="k">Acionador</div><div class="v">Agenda diária (fim de turno) + comando manual</div>
+          <div class="k">Caso de uso</div><div class="v">Padronizar fechamento operacional e reduzir esforço de consolidação.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA coleta relatórios de sistemas legados e o CY monta pacote (PDF/Excel) com KPIs, enviando a listas predefinidas.</p>
+          <h3>Atores</h3>
+          <ul><li>Supervisor</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Templates e destinatários definidos.</li><li>Fonte de dados legada acessível.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Pacote diário distribuído e arquivado.</li><li>Registro de envio e leitura (quando disponível).</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>RPA coleta relatórios externos.</li><li>CY compõe pacote e aplica branding.</li><li>CY distribui e registra evidência.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Dashboard &gt; Fechamento de Turno</li><li>Monitor de Integrações &gt; Distribuições</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Enviar somente dados permitidos por governança.</li><li>Se falhar envio, reprocessar automaticamente.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>shiftId</li><li>date</li><li>recipients[]</li><li>templates[]</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>packageUrls[]</li><li>distributionLog</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>tempo para fechamento</li><li>% fechamentos automáticos</li><li>redução de erros de consolidação</li></ul>
+        </section>
+        
+
+        <section id="bo-02" class="card">
+          <div class="id">BO-02</div>
+          <div class="title">Robô de cadastro em massa (clientes, contratos, tarifas) em sistemas legados</div>
+          
+        <div class="meta">
+          <div class="k">Categoria</div><div class="v">Backoffice e Analytics</div>
+          <div class="k">Acionador</div><div class="v">Evento CY: MASTERDATA.BULKLOAD.REQUESTED</div>
+          <div class="k">Caso de uso</div><div class="v">Acelerar onboarding de novos clientes/contratos quando o legado só aceita input manual.</div>
+        </div>
+        
+          <h3>Descrição</h3>
+          <p>RPA executa carga em massa guiada por planilha validada e retorna logs e inconsistências para ajuste rápido.</p>
+          <h3>Atores</h3>
+          <ul><li>Admin/Backoffice</li><li>CY</li><li>RPA Worker</li></ul>
+          <h3>Pré-condições</h3>
+          <ul><li>Planilha validada e aprovada.</li><li>Ambiente de homologação disponível para teste.</li></ul>
+          <h3>Pós-condições</h3>
+          <ul><li>Cadastros concluídos com log por linha.</li><li>Pendências geradas para itens rejeitados.</li></ul>
+          <h3>Fluxo principal</h3>
+          <ol><li>Usuário carrega planilha e inicia carga.</li><li>RPA executa lançamentos no legado e captura respostas.</li><li>CY exibe resultado (sucesso/erro por item) e permite reprocesso parcial.</li></ol>
+          <h3>Telas do sistema</h3>
+          <ul><li>Admin &gt; Master Data &gt; Carga em Massa</li><li>Monitor de Integrações &gt; Execuções RPA</li></ul>
+          <h3>Regras de Negócio</h3>
+          <ul><li>Executar primeiro em homologação; promover para produção por aprovação.</li><li>Logs completos para auditoria.</li></ul>
+          <h3>Especificação de Campos</h3>
+          
+        <table class="fields">
+          <tbody><tr><td>Entrada (mínimo)</td><td><ul><li>bulkFileId</li><li>entityType</li><li>rulesetId</li></ul></td></tr>
+          <tr><td>Saída (callback)</td><td><ul><li>successCount</li><li>errorRows[]</li><li>logUrl</li><li>jobId</li></ul></td></tr>
+        </tbody></table>
+        
+          <h3>KPIs / ROI (sugestão)</h3>
+          <ul><li>tempo para onboarding</li><li>% registros aceitos na primeira carga</li><li>redução de digitação manual</li></ul>
+        </section>
+        
+    <div class="footer">Gerado para HXtos CY • Conteúdo para desenho e treinamento operacional.</div>
+  </main>
 </div>
-    </div>
-
-    <!-- Toast container (kept compatible if Damage JS uses it) -->
-    <div id="toast" class="toast" role="status" aria-live="polite">OK</div>
-  </div>
-
-  <script>
-const KEY="CY_INSPECT_AVARIAS_WHITE_UI_v1";
-    const $=(q)=>document.querySelector(q);
-    const $$=(q)=>Array.from(document.querySelectorAll(q));
-    let S=load();
-
-    function load(){
-      try{
-        const raw=localStorage.getItem(KEY);
-        return raw ? Object.assign({inspections:[],damages:[]}, JSON.parse(raw)) : {inspections:[],damages:[]};
-      }catch(e){ return {inspections:[],damages:[]}; }
-    }
-    function persist(){
-      localStorage.setItem(KEY, JSON.stringify(S));
-      const pi=document.getElementById("pillInspect");
-      const pa=document.getElementById("pillAvarias");
-      if(pi) pi.textContent=S.inspections.length;
-      if(pa) pa.textContent=S.damages.length;
-    }
-    function uid(prefix){
-      const d=new Date(); const p=n=>String(n).padStart(2,"0");
-      return `${prefix}-${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;
-    }
-    function fmt(iso){
-      const d=new Date(iso); const p=n=>String(n).padStart(2,"0");
-      return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`;
-    }
-    function tagSev(sev){
-      const cls=sev==="BAIXA"?"ok":(sev==="MÉDIA"?"warn":"bad");
-      return `<span class="tag ${cls}"><span class="dot"></span>${sev}</span>`;
-    }
-    function tagStatus(status){return `<span class="tag info"><span class="dot"></span>${status}</span>`;}
-
-    function setPage(page){
-
-      if(!page){ return; }
-      
-
-    // Navigation (delegated) - garante clique no texto e no ícone/pill
-    (function(){
-      const nav=document.getElementById("nav");
-      if(!nav) return;
-      nav.addEventListener("click",(e)=>{
-        const a=e.target.closest('a[data-page]');
-        if(!a) return;
-        e.preventDefault();
-        setPage(a.getAttribute("data-page"));
-      });
-    })();
-
-const target=document.getElementById("page-"+page);
-      if(!target){ console.warn("Página não encontrada:", page); return; }
-
-      $$(".page").forEach(p=>p.classList.remove("active"));
-      target.classList.add("active");
-
-      // Tabs
-      const nav=document.getElementById("nav");
-      if(nav){
-        nav.querySelectorAll('a[data-page]').forEach(a=>{
-          a.classList.toggle("active", a.getAttribute("data-page")===page);
-          a.setAttribute("aria-selected", a.getAttribute("data-page")===page ? "true" : "false");
-        });
-      }
-const meta={
-        inspect:["CY | Inspect","Registrar inspeção e gerar avaria."],
-        avarias:["CY | Avarias","Registrar avaria com fotos/evidências e consultar lista."],
-    };
-      $("#pageTitle").textContent=meta[page][0];
-      $("#pageSub").textContent=meta[page][1];
-      if(page==="inspect") renderInspect();
-      if(page==="avarias") renderAvarias();
-    }
-// Inspect
-    function resetInspect(){
-      $("#i_cntr").value=""; $("#i_size").value=""; $("#i_unitType").value=""; $("#i_tipo").value="GATE IN"; $("#i_vinc").value="";
-      $("#i_resp").value=""; $("#i_sev").value="BAIXA"; $("#i_status").value="RASCUNHO"; $("#i_desc").value="";
-    }
-    function saveInspect(){
-      const cntr=$("#i_cntr").value.trim().toUpperCase();
-      if(!cntr){ alert("Informe o CNTR."); return; }
-      S.inspections.unshift({
-        id:uid("INSP"), cntr, size:$("#i_size").value, unitType:$("#i_unitType").value, tipo:$("#i_tipo").value, vinc:$("#i_vinc").value.trim(),
-        resp:$("#i_resp").value.trim(), sev:$("#i_sev").value, status:$("#i_status").value,
-        desc:$("#i_desc").value.trim(), createdAt:new Date().toISOString()
-      });
-      persist(); renderInspect(); resetInspect(); alert("Inspeção salva (demo).");
-    }
-    function renderInspect(){
-      const fcntr=$("#i_fcntr").value.trim().toUpperCase();
-      const fstatus=$("#i_fstatus").value;
-
-      const list=S.inspections
-        .filter(x=>!fcntr||x.cntr.includes(fcntr))
-        .filter(x=>!fstatus||x.status===fstatus)
-        .sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-
-      const el=$("#i_list");
-      if(!list.length){
-        el.innerHTML=`<div class="item" style="cursor:default"><div style="color:rgba(71,85,105,.95)">Nenhum registro.</div><div class="mono">—</div></div>`;
-        return;
-      }
-      el.innerHTML=list.map(x=>`
-        <div class="item" data-id="${x.id}">
-          <div>
-            <div><b>${x.cntr}</b> <span class="mono" style="opacity:.70">• ${x.id}</span></div>
-            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
-              ${tagSev(x.sev)} ${tagStatus(x.status)}
-              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>${x.tipo}</span>
-            </div>
-          </div>
-          <div class="mono" style="opacity:.60">${fmt(x.createdAt)}</div>
-        </div>`).join("");
-
-      el.querySelectorAll(".item[data-id]").forEach(r=>r.addEventListener("click",()=>{
-        const x=S.inspections.find(z=>z.id===r.getAttribute("data-id"));
-        alert(
-          `Inspeção ${x.id}\nCNTR: ${x.cntr}\nDimensão: ${x.size || "—"}\nUnidade: ${x.unitType || "—"}\nTipo: ${x.tipo}\nStatus: ${x.status}\nSeveridade: ${x.sev}\n` +
-          `Vínculo: ${x.vinc || "—"}\nResp: ${x.resp || "—"}\n\nDescrição:\n${x.desc || "—"}`
-        );
-      }));
-    }
-    function genAvariaFromInspect(){
-      const cntr=$("#i_cntr").value.trim().toUpperCase();
-      if(!cntr){ alert("Informe o CNTR antes de gerar avaria."); return; }
-      setPage("avarias");
-      $("#a_cntr").value=cntr;
-      $("#a_size").value=$("#i_size").value;
-      $("#a_unitType").value=$("#i_unitType").value;
-      $("#a_origem").value="VISTORIA";
-      $("#a_sev").value=$("#i_sev").value;
-      $("#a_status").value="ABERTA";
-      $("#a_area").value="PORTAS";
-      $("#a_tipo").value=(($("#i_sev").value==="CRÍTICA"||$("#i_sev").value==="ALTA") ? "DESALINHAMENTO" : "AMASSADO");
-      $("#a_desc").value=`Gerado a partir de Inspect. Observações: ${($("#i_desc").value||"—")}`;
-      avDraftPhotos=[]; renderChips();
-    }
-    $("#i_save").addEventListener("click", saveInspect);
-    $("#i_gen").addEventListener("click", genAvariaFromInspect);
-    $("#i_new").addEventListener("click", resetInspect);
-    $("#i_apply").addEventListener("click", renderInspect);
-    $("#i_clear").addEventListener("click", ()=>{ $("#i_fcntr").value=""; $("#i_fstatus").value=""; renderInspect(); });
-
-    // Avarias (with photos)
-    let avDraftPhotos=[];
-    function renderChips(){
-      const el=$("#a_chips"); el.innerHTML="";
-      if(!avDraftPhotos.length){
-        el.innerHTML=`<span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>sem fotos</span>`;
-        return;
-      }
-      avDraftPhotos.forEach(name=>{
-        const chip=document.createElement("span");
-        chip.className="chip";
-        chip.innerHTML=`📷 ${name} <span class="x">✕</span>`;
-        chip.title="Clique para remover";
-        chip.addEventListener("click",()=>{ avDraftPhotos=avDraftPhotos.filter(n=>n!==name); renderChips(); });
-        el.appendChild(chip);
-      });
-    }
-    $("#a_files").addEventListener("change",(e)=>{
-      Array.from(e.target.files||[]).forEach(f=>{ if(!avDraftPhotos.includes(f.name)) avDraftPhotos.push(f.name); });
-      e.target.value=""; renderChips();
-    });
-
-    function resetAvaria(){
-      $("#a_cntr").value=""; $("#a_size").value=""; $("#a_unitType").value=""; $("#a_origem").value="VISTORIA"; $("#a_sev").value="MÉDIA"; $("#a_status").value="ABERTA";
-      $("#a_area").value="PORTAS"; $("#a_tipo").value="AMASSADO"; $("#a_desc").value="";
-      avDraftPhotos=[]; renderChips();
-    }
-    function saveAvaria(){
-      const cntr=$("#a_cntr").value.trim().toUpperCase();
-      if(!cntr){ alert("Informe o CNTR."); return; }
-      S.damages.unshift({
-        id:uid("AVA"), cntr, size:$("#a_size").value, unitType:$("#a_unitType").value,
-        origem:$("#a_origem").value, sev:$("#a_sev").value, status:$("#a_status").value,
-        area:$("#a_area").value, tipo:$("#a_tipo").value, desc:$("#a_desc").value.trim(),
-        photos:avDraftPhotos.slice(), createdAt:new Date().toISOString()
-      });
-      persist(); renderAvarias(); resetAvaria(); alert("Avaria salva (demo).");
-    }
-    function renderAvarias(){
-      const fcntr=$("#a_fcntr").value.trim().toUpperCase();
-      const fstatus=$("#a_fstatus").value;
-      const fsev=$("#a_fsev").value;
-      const forigem=$("#a_forigem").value;
-
-      const list=S.damages
-        .filter(x=>!fcntr||x.cntr.includes(fcntr))
-        .filter(x=>!fstatus||x.status===fstatus)
-        .filter(x=>!fsev||x.sev===fsev)
-        .filter(x=>!forigem||x.origem===forigem)
-        .sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-
-      const el=$("#a_list");
-      if(!list.length){
-        el.innerHTML=`<div class="item" style="cursor:default"><div style="color:rgba(71,85,105,.95)">Nenhum registro.</div><div class="mono">—</div></div>`;
-        return;
-      }
-
-      el.innerHTML=list.map(x=>`
-        <div class="item" data-id="${x.id}">
-          <div>
-            <div><b>${x.cntr}</b> <span class="mono" style="opacity:.70">• ${x.id}</span></div>
-            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
-              ${tagSev(x.sev)} ${tagStatus(x.status)}
-              <span class="tag"><span class="dot" style="background:rgba(15,23,42,.35)"></span>${x.area}</span>
-              <span class="tag"><span class="dot" style="background:rgba(37,99,235,.85)"></span>${x.origem}</span>
-              <span class="tag"><span class="dot" style="background:rgba(16,185,129,.85)"></span>📷 ${(x.photos?.length||0)} foto(s)</span>
-            </div>
-          </div>
-          <div class="mono" style="opacity:.60">${fmt(x.createdAt)}</div>
-        </div>`).join("");
-
-      el.querySelectorAll(".item[data-id]").forEach(r=>r.addEventListener("click",()=>{
-        const x=S.damages.find(z=>z.id===r.getAttribute("data-id"));
-        alert(
-          `Avaria ${x.id}\nCNTR: ${x.cntr}\nDimensão: ${x.size || "—"}\nUnidade: ${x.unitType || "—"}\nOrigem: ${x.origem}\nStatus: ${x.status}\nSeveridade: ${x.sev}\n` +
-          `Área: ${x.area}\nTipo: ${x.tipo}\nFotos: ${(x.photos&&x.photos.length)?x.photos.join(", "):"—"}\n\nDescrição:\n${x.desc||"—"}`
-        );
-      }));
-    }
-
-    $("#a_save").addEventListener("click", saveAvaria);
-    $("#a_new").addEventListener("click", resetAvaria);
-    $("#a_apply").addEventListener("click", renderAvarias);
-    $("#a_clear").addEventListener("click", ()=>{ $("#a_fcntr").value=""; $("#a_fstatus").value=""; $("#a_fsev").value=""; $("#a_forigem").value=""; renderAvarias(); });
-
-
-    // Init
-    persist(); resetInspect(); resetAvaria(); renderChips();
-    renderInspect(); renderAvarias(); setPage("inspect");
-
-  </script>
-
 
 </body></html>
